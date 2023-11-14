@@ -46,6 +46,10 @@ This Java Shopping Cart application is a simple application that allows customer
 
 Youtube Link Placeholder
 
+## Instructions on how to run the application
+
+Placeholder info
+
 ## Contributors
 
 - Victor Burgos
