@@ -44,11 +44,11 @@ This Java Shopping Cart application is a simple application that allows customer
 
 ## Application Demo:
 
-[Youtube Link Placeholder]
+Youtube Link Placeholder
 
 ## Contributors
 
-- [Victor Burgos]
-- [Zafar Bacchus]
-- [Timothy Sims]
-- [Jerome Jackson]
+- Victor Burgos
+- Zafar Bacchus
+- Timothy Sims
+- Jerome Jackson
