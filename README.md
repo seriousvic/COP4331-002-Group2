@@ -42,7 +42,7 @@ This Java Shopping Cart application is a simple application that allows customer
 - **Java**
 - **Swing UI** 
 
-## Application Demo:
+## Application Demo
 
 Youtube Link Placeholder
 
