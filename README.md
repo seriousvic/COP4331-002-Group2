@@ -39,12 +39,12 @@ This Java Shopping Cart application is a simple application that allows customer
 
 ## Technologies Used
 
-- **Java:** The core programming language.
-- **Swing UI:** Used for building the graphical user interface.
+- **Java**
+- **Swing UI** 
 
 ## Application Demo:
 
-[Provide instructions on how to set up and run the application locally.]
+[Youtube Link Placeholder]
 
 ## Contributors
 
