@@ -2,7 +2,7 @@
 
 ## Overview
 
-This Java Shopping Cart application is a simple application that allows customers to browse products, add them to the shopping cart, and proceed to checkout. Sellers can manage the inventory, update product details, and view financial summaries.
+This Java Shopping Cart application is a simple application that allows customers to browse products, add them to the shopping cart, and proceed to checkout. Sellers can manage their inventory, update product details, and view their financial summaries.
 
 ## Features
 
