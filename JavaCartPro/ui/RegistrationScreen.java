@@ -6,16 +6,24 @@ import java.awt.event.ActionListener;
 public class RegistrationScreen extends JFrame {
     public RegistrationScreen() {
         setTitle("Registration");
-        setSize(800, 400);
+        setSize(600, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
         JLabel registerLabel = new JLabel("Registration Screen");
         JLabel newUsernameLabel = new JLabel("New Username:");
         JLabel newPasswordLabel = new JLabel("New Password:");
+        JLabel roleLabel = new JLabel("Role:");
         JTextField newUsernameField = new JTextField(20);
         JPasswordField newPasswordField = new JPasswordField(20);
         JButton registerButton = new JButton("Register");
+
+        JRadioButton customerRadioButton = new JRadioButton("Customer");
+        JRadioButton sellerRadioButton = new JRadioButton("Seller");
+
+        ButtonGroup roleGroup = new ButtonGroup();
+        roleGroup.add(customerRadioButton);
+        roleGroup.add(sellerRadioButton);
 
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -46,6 +54,19 @@ public class RegistrationScreen extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 3;
+        add(roleLabel, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        gbc.anchor = GridBagConstraints.WEST;
+        add(customerRadioButton, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        add(sellerRadioButton, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 5;
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER;
         add(registerButton, gbc);
@@ -53,8 +74,33 @@ public class RegistrationScreen extends JFrame {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(RegistrationScreen.this, "Registration successful!");
-                dispose();
+                // Get the entered username and password
+                String newUsername = newUsernameField.getText();
+                char[] newPasswordChars = newPasswordField.getPassword();
+                String newPassword = new String(newPasswordChars);
+
+                // Check if username or password is empty
+                if (newUsername.isEmpty() || newPassword.isEmpty()) {
+                    JOptionPane.showMessageDialog(RegistrationScreen.this,
+                            "Please fill in both username and password fields",
+                            "Registration Error", JOptionPane.ERROR_MESSAGE);
+                    return; // Exit the method without proceeding further
+                }
+
+                // Determine the selected role
+                String selectedRole = customerRadioButton.isSelected() ? "Customer" :
+                        sellerRadioButton.isSelected() ? "Seller" : "";
+
+                if (!selectedRole.isEmpty()) {
+                    JOptionPane.showMessageDialog(RegistrationScreen.this,
+                            "Registration successful as a " + selectedRole,
+                            "Registration Success", JOptionPane.INFORMATION_MESSAGE);
+                    dispose(); // Close the registration screen
+                } else {
+                    JOptionPane.showMessageDialog(RegistrationScreen.this,
+                            "Please select a role",
+                            "Registration Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }

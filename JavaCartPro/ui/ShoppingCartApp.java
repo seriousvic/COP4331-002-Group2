@@ -66,7 +66,16 @@ public class ShoppingCartApp extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(ShoppingCartApp.this, "Login button clicked!");
+                String username = usernameField.getText();
+                char[] password = passwordField.getPassword();
+
+                if (username.isEmpty() || password.length == 0) {
+                    JOptionPane.showMessageDialog(ShoppingCartApp.this, "Please fill in both username and password fields",
+                            "Login Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    // Process login logic here (e.g., check credentials)
+                    JOptionPane.showMessageDialog(ShoppingCartApp.this, "Login successful");
+                }
             }
         });
     }
