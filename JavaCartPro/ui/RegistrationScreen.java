@@ -2,8 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
+
+import JavaCartPro.model.*;
 
 public class RegistrationScreen extends JFrame {
+    private static final String USERS_FILE_PATH = "JavaCartPro/data/users.dat";
+
     public RegistrationScreen() {
         setTitle("Registration");
         setSize(600, 300);
@@ -78,20 +83,30 @@ public class RegistrationScreen extends JFrame {
                 String newUsername = newUsernameField.getText();
                 char[] newPasswordChars = newPasswordField.getPassword();
                 String newPassword = new String(newPasswordChars);
-
+                
                 // Check if username or password is empty
                 if (newUsername.isEmpty() || newPassword.isEmpty()) {
                     JOptionPane.showMessageDialog(RegistrationScreen.this,
                             "Please fill in both username and password fields",
                             "Registration Error", JOptionPane.ERROR_MESSAGE);
-                    return; // Exit the method without proceeding further
+                    return;
                 }
 
+                // Check if the username already exists
+                if (usernameExists(newUsername)) {
+                    JOptionPane.showMessageDialog(RegistrationScreen.this,
+                            "Username already exists. Please choose a different username",
+                            "Registration Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                
                 // Determine the selected role
                 String selectedRole = customerRadioButton.isSelected() ? "Customer" :
                         sellerRadioButton.isSelected() ? "Seller" : "";
 
                 if (!selectedRole.isEmpty()) {
+                    User newUser = new User(newUsername, newPassword, selectedRole);
+                    saveUser(newUser);
                     JOptionPane.showMessageDialog(RegistrationScreen.this,
                             "Registration successful as a " + selectedRole,
                             "Registration Success", JOptionPane.INFORMATION_MESSAGE);
@@ -103,5 +118,37 @@ public class RegistrationScreen extends JFrame {
                 }
             }
         });
+    }
+
+    private boolean usernameExists(String username) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(USERS_FILE_PATH))) {
+            while (true) {
+                try {
+                    User user = (User) ois.readObject();
+                    if (username.equals(user.getUsername())) {
+                        return true; // Username exists
+                    }
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (EOFException eof) {
+            // End of file reached, username does not exist
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private void saveUser(User user) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(USERS_FILE_PATH, true))) {
+            oos.writeObject(user);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new RegistrationScreen().setVisible(true));
     }
 }
