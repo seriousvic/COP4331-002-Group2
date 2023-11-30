@@ -1,9 +1,11 @@
 package JavaCartPro.src.model;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class User implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 8851151635568048702L;
 
     private String username;
