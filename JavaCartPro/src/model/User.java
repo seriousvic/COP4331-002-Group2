@@ -1,4 +1,4 @@
-package JavaCartPro.model;
+package JavaCartPro.src.model;
 
 import java.io.Serializable;
 

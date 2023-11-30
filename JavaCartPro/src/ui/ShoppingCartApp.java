@@ -1,7 +1,11 @@
+package JavaCartPro.src.ui;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import JavaCartPro.src.model.*;
 
 public class ShoppingCartApp extends JFrame {
     private JTextField usernameField;

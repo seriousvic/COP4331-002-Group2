@@ -1,13 +1,15 @@
+package JavaCartPro.src.ui;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 
-import JavaCartPro.model.*;
+import JavaCartPro.src.model.*;
 
 public class RegistrationScreen extends JFrame {
-    private static final String USERS_FILE_PATH = "JavaCartPro/data/users.dat";
+    private static final String USERS_FILE_PATH = "JavaCartPro/src/data/users.dat";
 
     public RegistrationScreen() {
         setTitle("Registration");
