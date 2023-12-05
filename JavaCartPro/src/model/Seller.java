@@ -1,69 +1,61 @@
 package JavaCartPro.src.model;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 
 /**
- * Represents a seller user in the shopping cart application
- * Extends the User class and includes methods specific to sellers
+ * The Seller class represents a seller user in the shopping cart application
  */
-public class Seller extends User {
+public class Seller extends User implements Serializable {
 
-    private List<Product> inventory;
+    @Serial
+    private static final long serialVersionUID = 987654321L;
 
     /**
-     * Constructs a new Seller object with the given username and password
-     * @param username The username of the seller
-     * @param password The password of the seller
+     * Constructs a new Seller object with the specified username, password, and sets the role to "SELLER"
+     * @param username the username of the seller
+     * @param password the password of the seller
      */
     public Seller(String username, String password) {
-        super(username, password, "seller");
-        this.inventory = initializeInventory();
-    }
-
-    /**
-     * Gets the inventory of the seller
-     * @return The list of products in the seller's inventory
-     */
-    public List<Product> getInventory() {
-        return inventory;
+        super(username, password, "SELLER");
     }
 
     /**
      * Adds a new product to the seller's inventory
-     * @param product The product to be added
+     * @param name        the name of the product
+     * @param description the description of the product
+     * @param price       the price of the product
+     * @param stock       the stock quantity of the product
      */
-    public void addProduct(Product product) {
-        inventory.add(product);
+    public void addProductToInventory(String name, String description, double price, int stock) {
+        Inventory.getInstance().addProduct(getUsername(), name, description, price, stock);
     }
 
     /**
      * Removes a product from the seller's inventory
-     * @param product The product to be removed
+     * @param name the name of the product to be removed
      */
-    public void removeProduct(Product product) {
-        inventory.remove(product);
+    public void removeProductFromInventory(String name) {
+        Inventory.getInstance().removeProduct(name, getUsername());
     }
 
     /**
-     * Updates the information of a product in the seller's inventory
-     * @param product         The product to be updated
-     * @param newDescription  The new description for the product
-     * @param newPrice        The new price for the product
+     * Updates the details of a product in the seller's inventory
+     * @param name        the name of the product to be updated
+     * @param description the new description of the product
+     * @param price       the new price of the product
+     * @param stock       the new stock quantity of the product
      */
-    public void updateProduct(Product product, String newDescription, double newPrice) {
-        if (inventory.contains(product)) {
-            product.setDescription(newDescription);
-            product.setPrice(newPrice);
-        }
+    public void updateProductInInventory(String name, String description, double price, int stock) {
+        Inventory.getInstance().updateProduct(getUsername(), name, description, price, stock);
     }
 
     /**
-     * Initializes the seller's inventory
-     * @return The initialized list of products in the seller's inventory
+     * Gets the seller's current product inventory
+     * @return a list of products in the seller's inventory
      */
-    private List<Product> initializeInventory() {
-        // Implement this method to initialize the seller's inventory
-        // Example: return Arrays.asList(new Product("Product1", "Description1", 10.0), new Product("Product2", "Description2", 15.0));
-        return null;
+    public List<ProductInterface> getInventory() {
+        return Inventory.getInstance().getProducts();
     }
 }
