@@ -1,5 +1,5 @@
 package JavaCartPro.src.ui;
-// a
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,9 +8,17 @@ import java.io.*;
 
 import JavaCartPro.src.model.*;
 
+/**
+ * The class representing the registration screen for the JavaCartPro application
+ * This class allows users to register by providing a new username, password, and role
+ */
 public class RegistrationScreen extends JFrame {
     private static final String USERS_FILE_PATH = "JavaCartPro/src/data/users.dat";
 
+    /**
+     * Constructs a new instance of the RegistrationScreen
+     * Sets up the user interface components and event listeners
+     */
     public RegistrationScreen() {
         setTitle("Registration");
         setSize(600, 300);
@@ -85,7 +93,7 @@ public class RegistrationScreen extends JFrame {
                 String newUsername = newUsernameField.getText();
                 char[] newPasswordChars = newPasswordField.getPassword();
                 String newPassword = new String(newPasswordChars);
-                
+
                 // Check if username or password is empty
                 if (newUsername.isEmpty() || newPassword.isEmpty()) {
                     JOptionPane.showMessageDialog(RegistrationScreen.this,
@@ -101,7 +109,7 @@ public class RegistrationScreen extends JFrame {
                             "Registration Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-                
+
                 // Determine the selected role
                 String selectedRole = customerRadioButton.isSelected() ? "Customer" :
                         sellerRadioButton.isSelected() ? "Seller" : "";
@@ -122,6 +130,11 @@ public class RegistrationScreen extends JFrame {
         });
     }
 
+    /**
+     * Checks if a username already exists in the user data file
+     * @param username The username to check for existence
+     * @return True if the username exists, false otherwise
+     */
     private boolean usernameExists(String username) {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(USERS_FILE_PATH))) {
             while (true) {
@@ -142,6 +155,10 @@ public class RegistrationScreen extends JFrame {
         return false;
     }
 
+    /**
+     * Saves a new user to the user data file
+     * @param user The user to be saved
+     */
     private void saveUser(User user) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(USERS_FILE_PATH, true))) {
             oos.writeObject(user);
@@ -150,6 +167,10 @@ public class RegistrationScreen extends JFrame {
         }
     }
 
+    /**
+     * The main method to launch the RegistrationScreen
+     * @param args Command-line arguments
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new RegistrationScreen().setVisible(true));
     }
