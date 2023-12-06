@@ -12,6 +12,15 @@ public class ShoppingCartController {
         DataManager.saveData(appData);
     }
 
+    public void productClick(AppData appData, ProductInterface product, User user, ShoppingCartView shoppingCartView) {
+        if (product instanceof Product) {
+            Product regularProduct = (Product) product;
+            new ProductView(appData, regularProduct, user).setVisible(true);
+        } else if (product instanceof BundleProduct) {
+            BundleProduct bundleProduct = (BundleProduct) product;
+            new BundleProductView(appData, bundleProduct, user, shoppingCartView).setVisible(true);
+        }
+    }
     public void updateQuantityClick(AppData appData, ProductInterface product, int quantity, Customer user) {
         ShoppingCart shoppingCart = user.getShoppingCart();
         int currentQuantity = shoppingCart.getQuantity(product);

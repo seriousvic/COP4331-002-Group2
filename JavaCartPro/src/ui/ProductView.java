@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class ProductView extends JFrame {
 
-    public ProductView(AppData appData, Product product, User user) {
+    public ProductView(AppData appData, ProductInterface product, User user) {
         this.appData = appData;
         this.product = product;
         this.user = user;
@@ -36,16 +36,19 @@ public class ProductView extends JFrame {
         panel.add(stockLabel);
 
         if (user instanceof Customer) {
-            SpinnerModel customerQuantityModel = new SpinnerNumberModel(1, 1, product.getStock(), 1);
-            JSpinner customerSpinner = new JSpinner(customerQuantityModel);
-            addToCart = new JButton("Add to Cart");
-            createBundle = new JButton("Add to bundle Bundle for seller " + product.getSeller());
-            addToCart.addActionListener(e -> controller.addToCartClick(appData, product, (int) customerSpinner.getValue(), ((Customer) user).getShoppingCart()));
-            createBundle.addActionListener(e -> controller.addToBundleClick(appData, product, ((Customer) user).getShoppingCart()));
-            panel.add(new JLabel("Quantity: "));
-            panel.add(customerSpinner);
-            panel.add(addToCart);
-            panel.add(createBundle);
+            if (product instanceof Product) {
+                SpinnerModel customerQuantityModel = new SpinnerNumberModel(1, 1, product.getStock(), 1);
+                JSpinner customerSpinner = new JSpinner(customerQuantityModel);
+                addToCart = new JButton("Add to Cart");
+                createBundle = new JButton("Add to bundle Bundle for seller " + product.getSeller());
+                addToCart.addActionListener(e -> controller.addToCartClick(appData, product, (int) customerSpinner.getValue(), ((Customer) user).getShoppingCart()));
+                createBundle.addActionListener(e -> controller.addToBundleClick(appData, product, ((Customer) user).getShoppingCart()));
+                panel.add(new JLabel("Quantity: "));
+                panel.add(customerSpinner);
+                panel.add(addToCart);
+                panel.add(createBundle);
+            }
+
         }
 
         if (user instanceof Seller) {
@@ -70,7 +73,7 @@ public class ProductView extends JFrame {
     }
 
     private AppData appData;
-    private final Product product;
+    private final ProductInterface product;
     private final User user;
     private JLabel nameLabel;
     private JLabel descriptionLabel;
