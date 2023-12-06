@@ -9,7 +9,8 @@ import java.util.List;
 
 public class InventoryView extends JFrame {
 
-    public InventoryView(User user) {
+    public InventoryView(AppData appData, User user) {
+        this.appData = appData;
         this.inventory = Inventory.getInstance();
         this.user = user;
         startUI();
@@ -40,7 +41,7 @@ public class InventoryView extends JFrame {
     }
 
 
-
+    private AppData appData;
     private Inventory inventory;
     private User user;
     private InventoryController controller = new InventoryController();

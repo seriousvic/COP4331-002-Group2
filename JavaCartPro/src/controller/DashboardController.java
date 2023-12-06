@@ -5,18 +5,18 @@ import JavaCartPro.src.ui.*;
 
 public class DashboardController {
 
-    public void goToInventoryClick(User user, DashboardView dashboardView) {
-        new InventoryView(user);
+    public void goToInventoryClick(AppData appData, User user, DashboardView dashboardView) {
+        new InventoryView(appData, user);
         dashboardView.dispose();
     }
 
-    public void goToCartClick(User user, ShoppingCart shoppingCart, DashboardView dashboardView) {
-        new ShoppingCartView(shoppingCart, user);
+    public void goToCartClick(AppData appData, User user, ShoppingCart shoppingCart, DashboardView dashboardView) {
+        new ShoppingCartView(appData, shoppingCart, user);
         dashboardView.dispose();
     }
 
-    public void goToFinancialSummaryClick(User user, FinancialHistory financialHistory, DashboardView dashboardView) {
-        new FinancialSummary(user, ((Seller) user).getFinancialHistory());
+    public void goToFinancialSummaryClick(AppData appData, User user, FinancialHistory financialHistory, DashboardView dashboardView) {
+        new FinancialSummary(appData, user, ((Seller) user).getFinancialHistory());
         dashboardView.dispose();
     }
 
