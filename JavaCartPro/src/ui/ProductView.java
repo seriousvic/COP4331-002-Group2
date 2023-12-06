@@ -6,10 +6,9 @@ import javax.swing.*;
 
 public class ProductView extends JPanel {
 
-    public ProductView(Product product, User user, ProductController controller) {
+    public ProductView(Product product, User user) {
         this.product = product;
         this.user = user;
-        this.controller = controller;
         startUI();
     }
 
@@ -72,5 +71,5 @@ public class ProductView extends JPanel {
     private JTextField priceField;
     private JTextField stockField;
     private JLabel sellerLabel;
-    private ProductController controller;
+    private ProductController controller = new ProductController();
 }

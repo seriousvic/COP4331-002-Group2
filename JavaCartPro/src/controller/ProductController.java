@@ -30,7 +30,7 @@ public class ProductController {
         }
     }
 
-public void removeFromCartClick(ProductInterface product, int quantity, ShoppingCart shoppingCart){
+    public void removeFromCartClick(ProductInterface product, int quantity, ShoppingCart shoppingCart){
         shoppingCart.removeProduct(product, quantity);
     }
 

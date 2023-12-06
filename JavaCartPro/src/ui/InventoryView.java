@@ -9,10 +9,9 @@ import java.util.List;
 
 public class InventoryView extends JFrame {
 
-    public InventoryView(Inventory inventory, User user, InventoryController controller) {
-        this.inventory = inventory;
+    public InventoryView(User user) {
+        this.inventory = Inventory.getInstance();
         this.user = user;
-        this.controller = controller;
         startUI();
         setTitle("Inventory");
         setSize(400, 300);

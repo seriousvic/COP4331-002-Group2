@@ -1,19 +1,21 @@
 package JavaCartPro.src.controller;
 
 import JavaCartPro.src.model.*;
+import JavaCartPro.src.ui.*;
 
 public class DashboardController {
 
-    public void goToInventoryClick(Inventory inventory) {
+    public void goToInventoryClick(User user) {
 
+        new InventoryView(user);
     }
 
-    public void goToCartClick(ShoppingCart shoppingCart) {
-
+    public void goToCartClick(User user, ShoppingCart shoppingCart) {
+        new ShoppingCartView(shoppingCart, user);
     }
 
-    public void goToProfileClick(User user) {
-
+    public void goToFinancialSummaryClick(User user) {
+        new FinancialSummary(user, ((Seller) user).getFinancialHistory());
     }
 
 
