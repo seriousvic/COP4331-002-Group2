@@ -12,13 +12,17 @@ public class Seller extends User implements Serializable {
     @Serial
     private static final long serialVersionUID = 987654321L;
 
+    private final FinancialHistory financialHistory;
+
     /**
      * Constructs a new Seller object with the specified username, password, and sets the role to "SELLER"
      * @param username the username of the seller
      * @param password the password of the seller
+     * @param history the financial history of the seller
      */
-    public Seller(String username, String password) {
+    public Seller(String username, String password, FinancialHistory history) {
         super(username, password, "SELLER");
+        financialHistory = history;
     }
 
     /**
@@ -57,5 +61,13 @@ public class Seller extends User implements Serializable {
      */
     public List<ProductInterface> getInventory() {
         return Inventory.getInstance().getProducts();
+    }
+
+    /**
+     * Gets the seller's financial history
+     * @return a FinancialHistory object containing the seller's transactions
+     */
+    public FinancialHistory getFinancialHistory() {
+        return financialHistory;
     }
 }
