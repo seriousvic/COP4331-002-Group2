@@ -1,6 +1,8 @@
 package JavaCartPro.src.model;
 
-public abstract class ProductDecorator implements ProductInterface{
+import java.io.Serializable;
+
+public abstract class ProductDecorator implements Serializable, ProductInterface{
 
     public ProductDecorator(ProductInterface product){
         this.product = product;
@@ -34,13 +36,10 @@ public abstract class ProductDecorator implements ProductInterface{
         product.setStock(stock);
     }
 
-//    public void setName(String name) {
-//        product.setName(name);
-//    }
-
     public void setDescription(String description) {
         product.setDescription(description);
     }
 
     protected ProductInterface product;
+    private static final long serialVersionUID = 123L;
 }

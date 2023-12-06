@@ -11,6 +11,7 @@ public class Seller extends User implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 987654321L;
+    private FinancialHistory financialHistory;
 
     /**
      * Constructs a new Seller object with the specified username, password, and sets the role to "SELLER"
@@ -19,6 +20,11 @@ public class Seller extends User implements Serializable {
      */
     public Seller(String username, String password) {
         super(username, password, "SELLER");
+        financialHistory = new FinancialHistory();
+    }
+
+    public FinancialHistory getFinancialHistory() {
+        return financialHistory;
     }
 
     /**
