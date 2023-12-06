@@ -4,10 +4,11 @@ import JavaCartPro.src.model.*;
 import JavaCartPro.src.ui.*;
 
 public class ProductController {
-    public void addToCartClick(ProductInterface product, int quantity, ShoppingCart shoppingCart){
+    public void addToCartClick(AppData appData, ProductInterface product, int quantity, ShoppingCart shoppingCart){
         shoppingCart.addProduct(product, quantity);
+        DataManager.saveData(appData);
     }
-    public void addToBundleClick(ProductInterface productInterface, ShoppingCart shoppingCart) {
+    public void addToBundleClick(AppData appData, ProductInterface productInterface, ShoppingCart shoppingCart) {
         if (!(productInterface instanceof Product)) {
             return;
         }
@@ -23,22 +24,26 @@ public class ProductController {
         if (bundleProduct != null) {
             if (!bundleProduct.getProducts().contains(product)) {
                 bundleProduct.addProduct(product);
+                DataManager.saveData(appData);
             }
         } else {
             bundleProduct = new BundleProduct(product);
             shoppingCart.addProduct(bundleProduct, 1);
+            DataManager.saveData(appData);
         }
     }
 
-    public void removeFromCartClick(ProductInterface product, int quantity, ShoppingCart shoppingCart){
+    public void removeFromCartClick(AppData appData, ProductInterface product, int quantity, ShoppingCart shoppingCart){
         if (shoppingCart.getItems().contains(product)) {
             shoppingCart.removeProduct(product, quantity);
+            DataManager.saveData(appData);
         }
     }
 
-    public void updateProductClick(Product product, String description, double price, int stock) {
+    public void updateProductClick(AppData appData, Product product, String description, double price, int stock) {
         product.setDescription(description);
         product.setPrice(price);
         product.setStock(stock);
+        DataManager.saveData(appData);
     }
 }

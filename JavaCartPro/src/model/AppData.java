@@ -37,6 +37,8 @@ public class AppData implements Serializable {
 
 
 
+
+
     private List<User> users;
     private Inventory inventory;
 }
