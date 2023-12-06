@@ -22,18 +22,18 @@ public class DashboardView extends JFrame {
         setLayout(new FlowLayout());
 
         JButton inventoryButton = new JButton("View Inventory");
-        inventoryButton.addActionListener(e -> controller.goToInventoryClick(user));
+        inventoryButton.addActionListener(e -> controller.goToInventoryClick(user, this));
         add(inventoryButton);
 
         if (user instanceof Customer) {
             JButton cartButton = new JButton("View Cart");
-            cartButton.addActionListener(e -> controller.goToCartClick(user, ((Customer) user).getShoppingCart()));
+            cartButton.addActionListener(e -> controller.goToCartClick(user, ((Customer) user).getShoppingCart(), this));
             add(cartButton);
         }
 
         if (user instanceof Seller) {
             JButton salesButton = new JButton("View Sales");
-            salesButton.addActionListener(e -> controller.goToFinancialSummaryClick(user, ((Seller) user).getFinancialHistory()));
+            salesButton.addActionListener(e -> controller.goToFinancialSummaryClick(user, ((Seller) user).getFinancialHistory(), this));
             add(salesButton);
         }
     }
