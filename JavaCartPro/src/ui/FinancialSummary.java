@@ -2,12 +2,14 @@ package JavaCartPro.src.ui;
 import JavaCartPro.src.model.FinancialHistory;
 import JavaCartPro.src.model.Transaction;
 import JavaCartPro.src.model.Product;
+import JavaCartPro.src.model.User;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
 public class FinancialSummary extends JFrame {
+    private User user;
     private FinancialHistory financialHistory;
     private JTextArea transactionTextArea;
     private JLabel totalSalesLabel;
@@ -15,7 +17,8 @@ public class FinancialSummary extends JFrame {
     private JLabel profitLabel;
     private JLabel costsLabel;
 
-    public FinancialSummary(FinancialHistory financialHistory) {
+    public FinancialSummary(User user, FinancialHistory financialHistory) {
+        this.user = user;
         this.financialHistory = financialHistory;
 
         setTitle("Financial Summary");
