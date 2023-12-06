@@ -21,3 +21,4 @@ public class PercentDiscount implements Discount{
         purchase.setRevenue(newRevenue);
     }
 }
+//
