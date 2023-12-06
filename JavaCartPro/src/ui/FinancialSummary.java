@@ -1,8 +1,5 @@
 package JavaCartPro.src.ui;
-import JavaCartPro.src.model.FinancialHistory;
-import JavaCartPro.src.model.Transaction;
-import JavaCartPro.src.model.Product;
-import JavaCartPro.src.model.User;
+import JavaCartPro.src.model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,8 +13,10 @@ public class FinancialSummary extends JFrame {
     private JLabel revenueLabel;
     private JLabel profitLabel;
     private JLabel costsLabel;
+    private AppData appData;
 
-    public FinancialSummary(User user, FinancialHistory financialHistory) {
+    public FinancialSummary(AppData appData, User user, FinancialHistory financialHistory) {
+        this.appData = appData;
         this.user = user;
         this.financialHistory = financialHistory;
 

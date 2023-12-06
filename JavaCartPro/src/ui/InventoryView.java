@@ -9,13 +9,15 @@ import java.util.List;
 
 public class InventoryView extends JFrame {
 
-    public InventoryView(User user) {
-        this.inventory = Inventory.getInstance();
+    public InventoryView(AppData appData, User user) {
+        this.appData = appData;
+        this.inventory = appData.getInventory();
         this.user = user;
         startUI();
         setTitle("Inventory");
-        setSize(400, 300);
+        setSize(800, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 
@@ -31,8 +33,8 @@ public class InventoryView extends JFrame {
             if (user instanceof Customer || (user instanceof Seller && product.getSeller().equals(user.getUsername()))) {
                 JPanel productPanel = new JPanel();
                 productPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-                productPanel.add(new JLabel(product.getName()));
-                productPanel.add(new JLabel(product.getSeller()));
+                productPanel.add(new JLabel("Product: " + product.getName()));
+                productPanel.add(new JLabel("Seller: " + product.getSeller()));
                 productPanel.add(new JLabel("$" + String.format("%.2f", product.getPrice())));
                 listProductPanel.add(productPanel);
             }
@@ -40,7 +42,7 @@ public class InventoryView extends JFrame {
     }
 
 
-
+    private AppData appData;
     private Inventory inventory;
     private User user;
     private InventoryController controller = new InventoryController();
