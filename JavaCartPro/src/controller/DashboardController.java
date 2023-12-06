@@ -14,7 +14,7 @@ public class DashboardController {
         new ShoppingCartView(shoppingCart, user);
     }
 
-    public void goToFinancialSummaryClick(User user) {
+    public void goToFinancialSummaryClick(User user, FinancialHistory financialHistory) {
         new FinancialSummary(user, ((Seller) user).getFinancialHistory());
     }
 
