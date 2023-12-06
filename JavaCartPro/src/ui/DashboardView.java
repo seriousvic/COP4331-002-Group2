@@ -2,13 +2,15 @@ package JavaCartPro.src.ui;
 
 import javax.swing.*;
 import JavaCartPro.src.model.*;
+import JavaCartPro.src.controller.*;
 
 import java.awt.*;
 
 public class DashboardView extends JFrame {
 
-    public DashboardView(User user) {
+    public DashboardView(User user, DashboardController controller) {
         this.user = user;
+        this.controller = controller;
         startUI();
         setTitle(user.getUsername() + "'s Dashboard");
         setSize(400, 300);
@@ -20,12 +22,12 @@ public class DashboardView extends JFrame {
         setLayout(new FlowLayout());
 
         JButton inventoryButton = new JButton("View Inventory");
-        inventoryButton.addActionListener(e -> goToInventory());
+        inventoryButton.addActionListener(e -> goToInventoryClick());
         add(inventoryButton);
 
         if (user instanceof Customer) {
             JButton cartButton = new JButton("View Cart");
-            cartButton.addActionListener(e -> goToCart());
+            cartButton.addActionListener(e -> goToCartClick());
             add(cartButton);
         }
 
@@ -37,4 +39,5 @@ public class DashboardView extends JFrame {
     }
 
     private User user;
+    private DashboardController controller = new DashboardController();
 }
