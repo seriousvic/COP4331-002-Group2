@@ -26,5 +26,5 @@ public class DataManager {
             return appData;
     }
 
-    private static final String data = "../data/appData.dat";
+    private static final String data = "JavaCartPro/src/data/appData.dat";
 }
