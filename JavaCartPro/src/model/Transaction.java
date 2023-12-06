@@ -12,11 +12,20 @@ public class Transaction implements Serializable {
     private int totalSales;
     private double revenue;
     private double costs;
+    private final Discount discount;
 
     public Transaction(User user, List<Product> products) {
         this.user = user;
         this.products = products;
         calculateTransactionValues();
+        this.discount = null;
+    }
+
+    public Transaction(User user, List<Product> products, Discount coupon) {
+        this.user = user;
+        this.products = products;
+        calculateTransactionValues();
+        this.discount = coupon;
     }
 
     //calculate total sales, revenue, and cost for seller
@@ -32,6 +41,13 @@ public class Transaction implements Serializable {
                 costs += product.getPrice();
             }
         }
+        if (this.discount != null) {
+            discount.applyDiscount(this);
+        }
+    }
+
+    protected void setRevenue(double newRevenue) {
+        this.revenue = newRevenue;
     }
 
     public User getUser() {
