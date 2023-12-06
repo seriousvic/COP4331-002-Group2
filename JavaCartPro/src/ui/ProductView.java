@@ -9,7 +9,7 @@ public class ProductView extends JPanel {
     public ProductView(Product product, User user, ProductController controller) {
         this.product = product;
         this.user = user;
-        this.controller = controller
+        this.controller = controller;
         startUI();
     }
 
@@ -24,7 +24,7 @@ public class ProductView extends JPanel {
         stockLabel = new JLabel("Stock: " + product.getStock());
 
         add(nameLabel);
-        add(sellerLabel)
+        add(sellerLabel);
         add(descriptionLabel);
         add(priceLabel);
         add(stockLabel);
@@ -41,7 +41,7 @@ public class ProductView extends JPanel {
             add(createBundle);
         }
 
-        if (user instanceof Seller && (!(product instanceof BundleProduct) {
+        if (user instanceof Seller) {
             updateButton = new JButton("Update Product");
             updateButton.addActionListener(e -> controller.updateProductClick(product, descriptionField.getText(), Double.parseDouble(priceField.getText()), Integer.parseInt(stockField.getText())));
             add(new JLabel("Description:"));
