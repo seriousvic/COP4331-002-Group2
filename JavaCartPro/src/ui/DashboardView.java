@@ -21,16 +21,20 @@ public class DashboardView extends JFrame {
     }
 
     public void startUI() {
-        setLayout(new FlowLayout());
+        JPanel dashboardDisplayPanel = new JPanel();
+        dashboardDisplayPanel.setLayout(new BoxLayout(dashboardDisplayPanel, BoxLayout.Y_AXIS));
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+
 
         JButton inventoryButton = new JButton("View Inventory");
         inventoryButton.addActionListener(e -> controller.goToInventoryClick(appData, user, this));
-        add(inventoryButton);
+        buttonPanel.add(inventoryButton);
 
         if (user instanceof Customer) {
             JButton cartButton = new JButton("View Cart");
             cartButton.addActionListener(e -> controller.goToCartClick(appData, user, ((Customer) user).getShoppingCart(), this));
-            add(cartButton);
+            buttonPanel.add(cartButton);
         }
 
         if (user instanceof Seller) {
@@ -39,8 +43,12 @@ public class DashboardView extends JFrame {
             salesButton.addActionListener(e -> controller.goToFinancialSummaryClick(appData, user, ((Seller) user).getFinancialHistory(), this));
             listProductButton.addActionListener(e -> controller.goToListProductClick(appData, user, this));
             add(salesButton);
-            add(listProductButton);
+            buttonPanel.add(listProductButton);
         }
+        getContentPane().add(buttonPanel, BorderLayout.NORTH);
+        JScrollPane scrollPane = new JScrollPane(dashboardDisplayPanel);
+        add(scrollPane);
+
     }
 
     private User user;
