@@ -7,10 +7,19 @@ import java.awt.event.ActionListener;
 
 import JavaCartPro.src.model.*;
 
+/**
+ * The main class for the JavaCartPro shopping application
+ * This class extends JFrame and provides the user interface for
+ * user login and registration
+ */
 public class ShoppingCartApp extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
 
+    /**
+     * Constructs a new instance of ShoppingCartApp
+     * Sets up the user interface components and event listeners
+     */
     public ShoppingCartApp() {
         setTitle("JavaCartPro");
         setSize(800, 400);
@@ -28,6 +37,8 @@ public class ShoppingCartApp extends JFrame {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
+
+        // Adding components to the layout
 
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -59,6 +70,8 @@ public class ShoppingCartApp extends JFrame {
         gbc.gridy = 6;
         add(registerButton, gbc);
 
+        // Event listeners for buttons
+
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -84,6 +97,10 @@ public class ShoppingCartApp extends JFrame {
         });
     }
 
+    /**
+     * The main method to launch the ShoppingCartApp
+     * @param args Command-line arguments
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
