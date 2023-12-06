@@ -31,7 +31,9 @@ public class ProductController {
     }
 
     public void removeFromCartClick(ProductInterface product, int quantity, ShoppingCart shoppingCart){
-        shoppingCart.removeProduct(product, quantity);
+        if (shoppingCart.getItems().contains(product)) {
+            shoppingCart.removeProduct(product, quantity);
+        }
     }
 
     public void updateProductClick(Product product, String description, double price, int stock) {
