@@ -11,7 +11,7 @@ public class DataManager {
         }
     }
 
-    public static Object loadData() {
+    public static AppData loadData() {
         AppData appData = null;
         File file = new File(data);
         if (file.exists()) {
