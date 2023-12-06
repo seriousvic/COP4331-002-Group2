@@ -67,10 +67,6 @@ public class ProductView extends JFrame {
         contentPane.add(panel);
         pack();
         setVisible(true);
-
-//        toInventoryButton = new JButton("Back to Inventory");
-//        toInventoryButton.addActionListener(e -> controller.toInventoryClick());
-//        add(toInventoryButton);
     }
 
     private AppData appData;

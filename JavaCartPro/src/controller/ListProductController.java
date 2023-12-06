@@ -8,6 +8,4 @@ public class ListProductController {
         appData.addProduct(seller, name, description, price, stock);
         DataManager.saveData(appData);
     }
-
-
 }

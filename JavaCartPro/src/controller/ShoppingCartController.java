@@ -23,11 +23,13 @@ public class ShoppingCartController {
         DataManager.saveData(appData);
     }
     public void dashboardClick(AppData appData, User user, ShoppingCartView shoppingCartView) {
+        DataManager.saveData(appData);
         new DashboardView(appData, user);
         shoppingCartView.dispose();
     }
 
     public void goToInventoryClick(AppData appData, User user, ShoppingCartView shoppingCartView) {
+        DataManager.saveData(appData);
         new InventoryView(appData, user);
         shoppingCartView.dispose();
     }
