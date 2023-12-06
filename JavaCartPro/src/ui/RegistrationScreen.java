@@ -91,12 +91,10 @@ public class RegistrationScreen extends JFrame {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Get the entered username and password
                 String newUsername = newUsernameField.getText();
                 char[] newPasswordChars = newPasswordField.getPassword();
                 String newPassword = new String(newPasswordChars);
 
-                // Check if username or password is empty
                 if (newUsername.isEmpty() || newPassword.isEmpty()) {
                     JOptionPane.showMessageDialog(RegistrationScreen.this,
                             "Please fill in both username and password fields",
@@ -104,7 +102,6 @@ public class RegistrationScreen extends JFrame {
                     return;
                 }
 
-                // Check if the username already exists
                 if (usernameExists(newUsername)) {
                     JOptionPane.showMessageDialog(RegistrationScreen.this,
                             "Username already exists. Please choose a different username",
@@ -112,7 +109,6 @@ public class RegistrationScreen extends JFrame {
                     return;
                 }
 
-                // Determine the selected role
                 String selectedRole = customerRadioButton.isSelected() ? "Customer" :
                         sellerRadioButton.isSelected() ? "Seller" : "";
 
@@ -133,7 +129,7 @@ public class RegistrationScreen extends JFrame {
                     JOptionPane.showMessageDialog(RegistrationScreen.this,
                             "Registration successful as a " + selectedRole,
                             "Registration Success", JOptionPane.INFORMATION_MESSAGE);
-                    dispose(); // Close the registration screen
+                    dispose();
                 } else {
                     JOptionPane.showMessageDialog(RegistrationScreen.this,
                             "Please select a role",
@@ -154,22 +150,6 @@ public class RegistrationScreen extends JFrame {
                 return true;
             }
         }
-//        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(USERS_FILE_PATH))) {
-//            while (true) {
-//                try {
-//                    User user = (User) ois.readObject();
-//                    if (username.equals(user.getUsername())) {
-//                        return true; // Username exists
-//                    }
-//                } catch (ClassNotFoundException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        } catch (EOFException eof) {
-//            // End of file reached, username does not exist
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         return false;
     }
 

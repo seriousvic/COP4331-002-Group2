@@ -11,7 +11,6 @@ public class InventoryView extends JFrame {
 
     public InventoryView(AppData appData, User user) {
         this.appData = appData;
-//        this.inventory = appData.getInventory();
         this.user = user;
         startUI();
         setTitle("Inventory");

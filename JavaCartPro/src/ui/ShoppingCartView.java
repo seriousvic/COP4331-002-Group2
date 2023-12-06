@@ -102,15 +102,6 @@ public class ShoppingCartView extends JFrame {
     }
 
 
-
-//    private Map<ProductInterface, Integer> aggregateProductQuantities() {
-//        Map<ProductInterface, Integer> productQuantities = new HashMap<>();
-//        for (ProductInterface product : shoppingCart.getItems()) {
-//            productQuantities.put(product, productQuantities.getOrDefault(product, 0) + shoppingCart.getQuantity(product));
-//        }
-//        return productQuantities;
-//    }
-
     public void refreshView() {
         getContentPane().removeAll();
         startUI();
