@@ -15,4 +15,5 @@ public class FlatProductDecorator extends ProductDecorator{
     }
 
     private final double flatDiscount;
+    private static final long serialVersionUID = 1234567L;
 }

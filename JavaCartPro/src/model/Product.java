@@ -19,10 +19,6 @@ public class Product implements ProductInterface, Serializable {
         return this.name;
     }
 
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-
     public String getDescription() {
         return this.description;
     }
@@ -53,5 +49,5 @@ public class Product implements ProductInterface, Serializable {
     private String description;
     private double price;
     private int stock;
-    private static final long serialVersionUID = 123456789L;
+    private static final long serialVersionUID = 12L;
 }

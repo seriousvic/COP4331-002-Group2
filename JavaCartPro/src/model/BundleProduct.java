@@ -15,33 +15,25 @@ public class BundleProduct implements ProductInterface, Serializable {
         this.seller = product.getSeller();
     }
 
-    public boolean addProduct(ProductInterface product) {
+    public void addProduct(ProductInterface product) {
         if (!products.contains(product) && product.getSeller().equals(seller)) {
             products.add(product);
             updateBundle();
-            return true;
         }
-        return false;
     }
 
-    public boolean removeProduct(ProductInterface product) {
+    public void removeProduct(ProductInterface product) {
         if (products.contains(product)) {
             products.remove(product);
             updateBundle();
-            return true;
         }
-        return false;
     }
 
     public void updateBundle() {
-//        this.setName("");
         this.setDescription("");
         this.setPrice(0.0);
         this.setStock(0);
     }
-
-//    public void setName(String name){
-//    }
 
     public void setDescription(String description){
         if (products.isEmpty()){
@@ -109,6 +101,10 @@ public class BundleProduct implements ProductInterface, Serializable {
         return this.description;
     }
 
+    public List<ProductInterface> getProducts(){
+        return this.products;
+    }
+
 
     private List<ProductInterface> products = new ArrayList<>();
     private final String name;
@@ -116,5 +112,5 @@ public class BundleProduct implements ProductInterface, Serializable {
     private double price;
     private int stock;
     private final String seller;
-    private static final long serialVersionUID = 1234567890L;
+    private static final long serialVersionUID = 123L;
 }

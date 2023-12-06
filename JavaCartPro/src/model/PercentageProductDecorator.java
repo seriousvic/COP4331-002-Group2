@@ -12,4 +12,5 @@ public class PercentageProductDecorator extends ProductDecorator {
     }
 
     private final double percentage;
+    private static final long serialVersionUID = 123456L;
 }

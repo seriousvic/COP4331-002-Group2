@@ -53,7 +53,7 @@ public class Inventory implements Serializable {
         return new ArrayList<>(products);
     }
 
-    private static final long serialVersionUID = 987654321L;
+    private static final long serialVersionUID = 12345L;
     private List<ProductInterface> products;
     private static Inventory instance;
 }
