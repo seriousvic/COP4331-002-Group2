@@ -4,7 +4,7 @@ import JavaCartPro.src.controller.*;
 import JavaCartPro.src.model.*;
 
 public class ShoppingCartView {
-    public ShoppingCartView(AppData appData, shoppingCart, User user) {
+    public ShoppingCartView(AppData appData, ShoppingCart shoppingCart, User user) {
         this.appData = appData;
         this.shoppingCart = shoppingCart;
         this.user = user;
