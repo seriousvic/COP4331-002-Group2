@@ -78,7 +78,7 @@ public class ShoppingCartApp extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Open the registration screen
-                new RegistrationScreen().setVisible(true);
+                new RegistrationScreen(appData).setVisible(true);
             }
         });
 

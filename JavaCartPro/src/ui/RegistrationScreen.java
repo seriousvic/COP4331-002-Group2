@@ -13,13 +13,15 @@ import JavaCartPro.src.model.*;
  * This class allows users to register by providing a new username, password, and role
  */
 public class RegistrationScreen extends JFrame {
-    private static final String USERS_FILE_PATH = "JavaCartPro/src/data/users.dat";
+//    private static final String USERS_FILE_PATH = "JavaCartPro/src/data/users.dat";
+    AppData appData;
 
     /**
      * Constructs a new instance of the RegistrationScreen
      * Sets up the user interface components and event listeners
      */
-    public RegistrationScreen() {
+    public RegistrationScreen(AppData appData) {
+        this.appData = appData;
         setTitle("Registration");
         setSize(600, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -116,7 +118,8 @@ public class RegistrationScreen extends JFrame {
 
                 if (!selectedRole.isEmpty()) {
                     User newUser = new User(newUsername, newPassword, selectedRole);
-                    saveUser(newUser);
+                    appData.addUser(newUser);
+                    DataManager.saveData(appData);
                     JOptionPane.showMessageDialog(RegistrationScreen.this,
                             "Registration successful as a " + selectedRole,
                             "Registration Success", JOptionPane.INFORMATION_MESSAGE);
@@ -136,22 +139,27 @@ public class RegistrationScreen extends JFrame {
      * @return True if the username exists, false otherwise
      */
     private boolean usernameExists(String username) {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(USERS_FILE_PATH))) {
-            while (true) {
-                try {
-                    User user = (User) ois.readObject();
-                    if (username.equals(user.getUsername())) {
-                        return true; // Username exists
-                    }
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
+        for (User user : appData.getUsers()) {
+            if (username.equals(user.getUsername())) {
+                return true;
             }
-        } catch (EOFException eof) {
-            // End of file reached, username does not exist
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+//        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(USERS_FILE_PATH))) {
+//            while (true) {
+//                try {
+//                    User user = (User) ois.readObject();
+//                    if (username.equals(user.getUsername())) {
+//                        return true; // Username exists
+//                    }
+//                } catch (ClassNotFoundException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        } catch (EOFException eof) {
+//            // End of file reached, username does not exist
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         return false;
     }
 
@@ -159,19 +167,22 @@ public class RegistrationScreen extends JFrame {
      * Saves a new user to the user data file
      * @param user The user to be saved
      */
-    private void saveUser(User user) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(USERS_FILE_PATH, true))) {
-            oos.writeObject(user);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void saveUser(User user) {
+//        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(USERS_FILE_PATH, true))) {
+//            oos.writeObject(user);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     /**
      * The main method to launch the RegistrationScreen
      * @param args Command-line arguments
      */
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new RegistrationScreen().setVisible(true));
+        SwingUtilities.invokeLater(() -> {
+            AppData appData = DataManager.loadData();
+            new RegistrationScreen(appData).setVisible(true);
+        });
     }
 }
