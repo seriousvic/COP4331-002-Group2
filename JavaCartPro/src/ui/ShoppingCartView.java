@@ -45,7 +45,8 @@ public class ShoppingCartView extends JFrame {
 
         for (ProductInterface product : uniqueProducts(shoppingCart)) {
             JPanel productPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-            JLabel nameLabel = new JLabel(product.getName());
+            JButton productNameButton = new JButton(product.getName());
+            productNameButton.addActionListener(e -> controller.productClick(appData, product, user, this));
             JLabel priceLabel = new JLabel("$" + String.format("%.2f", product.getPrice()));
             JLabel quantityLabel = new JLabel("Quantity: " + shoppingCart.getQuantity(product));
 
@@ -66,7 +67,7 @@ public class ShoppingCartView extends JFrame {
                 refreshView();
             });
 
-            productPanel.add(nameLabel);
+            productPanel.add(productNameButton);
             productPanel.add(priceLabel);
             productPanel.add(quantityLabel);
             productPanel.add(quantitySpinner);

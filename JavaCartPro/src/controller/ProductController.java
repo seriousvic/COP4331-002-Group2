@@ -40,7 +40,7 @@ public class ProductController {
         }
     }
 
-    public void updateProductClick(AppData appData, Product product, String description, double price, int stock) {
+    public void updateProductClick(AppData appData, ProductInterface product, String description, double price, int stock) {
         product.setDescription(description);
         product.setPrice(price);
         product.setStock(stock);

@@ -11,7 +11,7 @@ public class InventoryController {
         inventoryView.dispose();
     }
 
-    public void productClick(AppData appData, Product product, User user) {
+    public void productClick(AppData appData, ProductInterface product, User user) {
         new ProductView(appData, product, user);
     }
 
