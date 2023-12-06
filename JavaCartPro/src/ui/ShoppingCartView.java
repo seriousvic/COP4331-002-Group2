@@ -3,7 +3,9 @@ package JavaCartPro.src.ui;
 import JavaCartPro.src.controller.*;
 import JavaCartPro.src.model.*;
 
-public class ShoppingCartView {
+import javax.swing.*;
+
+public class ShoppingCartView extends JFrame {
     public ShoppingCartView(AppData appData, ShoppingCart shoppingCart, User user) {
         this.appData = appData;
         this.shoppingCart = shoppingCart;

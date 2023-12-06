@@ -20,5 +20,7 @@ public class DashboardController {
         dashboardView.dispose();
     }
 
-
+    public void goToListProductClick(AppData appData, User user, DashboardView dashboardView) {
+        new ListProductView(appData, user);
+    }
 }

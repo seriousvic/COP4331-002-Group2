@@ -117,7 +117,17 @@ public class RegistrationScreen extends JFrame {
                         sellerRadioButton.isSelected() ? "Seller" : "";
 
                 if (!selectedRole.isEmpty()) {
-                    User newUser = new User(newUsername, newPassword, selectedRole);
+                    User newUser;
+                    if (customerRadioButton.isSelected()) {
+                        newUser = new Customer(newUsername, newPassword);
+                    } else if (sellerRadioButton.isSelected()) {
+                        newUser = new Seller(newUsername, newPassword);
+                    } else {
+                        JOptionPane.showMessageDialog(RegistrationScreen.this,
+                                "Please select a role",
+                                "Registration Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
                     appData.addUser(newUser);
                     DataManager.saveData(appData);
                     JOptionPane.showMessageDialog(RegistrationScreen.this,

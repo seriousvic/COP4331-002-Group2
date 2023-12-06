@@ -96,6 +96,7 @@ public class ShoppingCartApp extends JFrame {
                     if (user != null){
                         JOptionPane.showMessageDialog(ShoppingCartApp.this, "Login successful");
                         new DashboardView(appData, user).setVisible(true);
+                        ShoppingCartApp.this.dispose();
                     } else {
                         JOptionPane.showMessageDialog(ShoppingCartApp.this, "Invalid username or password",
                                 "Login Error", JOptionPane.ERROR_MESSAGE);
