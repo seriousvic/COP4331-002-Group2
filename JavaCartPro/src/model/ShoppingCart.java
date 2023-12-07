@@ -26,6 +26,24 @@ public class ShoppingCart implements Serializable {
         }
     }
 
+    public int getQuantity(ProductInterface product) {
+        int quantity = 0;
+        for (ProductInterface item : items) {
+            if (item.equals(product)) {
+                quantity++;
+            }
+        }
+        return quantity;
+    }
+
+    public double getTotal() {
+        double total = 0;
+        for (ProductInterface item : items) {
+            total += item.getPrice();
+        }
+        return total;
+    }
+
     public List<ProductInterface> getItems() {
         return items;
     }

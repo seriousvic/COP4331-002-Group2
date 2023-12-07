@@ -14,6 +14,10 @@ public class FlatProductDecorator extends ProductDecorator{
         return super.getPrice() - flatDiscount;
     }
 
+    public String getDescription() {
+        return super.getDescription() + " - $" + flatDiscount + " off each";
+    }
+
     private final double flatDiscount;
     private static final long serialVersionUID = 1234567L;
 }

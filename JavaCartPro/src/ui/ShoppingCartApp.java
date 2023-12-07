@@ -15,12 +15,14 @@ import JavaCartPro.src.model.*;
 public class ShoppingCartApp extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
+    private AppData appData;
 
     /**
      * Constructs a new instance of ShoppingCartApp
      * Sets up the user interface components and event listeners
      */
     public ShoppingCartApp() {
+        appData = DataManager.loadData();
         setTitle("JavaCartPro");
         setSize(800, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -76,7 +78,7 @@ public class ShoppingCartApp extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Open the registration screen
-                new RegistrationScreen().setVisible(true);
+                new RegistrationScreen(appData).setVisible(true);
             }
         });
 
@@ -90,11 +92,27 @@ public class ShoppingCartApp extends JFrame {
                     JOptionPane.showMessageDialog(ShoppingCartApp.this, "Please fill in both username and password fields",
                             "Login Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    // Process login logic here (e.g., check credentials)
-                    JOptionPane.showMessageDialog(ShoppingCartApp.this, "Login successful");
+                    User user = login(username, new String(password));
+                    if (user != null){
+                        JOptionPane.showMessageDialog(ShoppingCartApp.this, "Login successful");
+                        new DashboardView(appData, user).setVisible(true);
+                        ShoppingCartApp.this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(ShoppingCartApp.this, "Invalid username or password",
+                                "Login Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         });
+    }
+
+    private User login(String username, String password) {
+        for (User user : appData.getUsers()) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                return user;
+            }
+        }
+        return null;
     }
 
     /**

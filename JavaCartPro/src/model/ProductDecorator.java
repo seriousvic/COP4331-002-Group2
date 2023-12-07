@@ -40,6 +40,10 @@ public abstract class ProductDecorator implements Serializable, ProductInterface
         product.setDescription(description);
     }
 
+    public Seller getSellerAccount() {
+        return product.getSellerAccount();
+    }
+
     protected ProductInterface product;
     private static final long serialVersionUID = 123L;
 }

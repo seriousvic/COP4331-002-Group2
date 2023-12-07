@@ -8,36 +8,50 @@ import java.awt.*;
 
 public class DashboardView extends JFrame {
 
-    public DashboardView(User user, DashboardController controller) {
+    public DashboardView(AppData appData, User user) {
+        this.appData = appData;
         this.user = user;
-        this.controller = controller;
+        this.controller = new DashboardController();
         startUI();
         setTitle(user.getUsername() + "'s Dashboard");
-        setSize(400, 300);
+        setSize(800, 400);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
 
     public void startUI() {
-        setLayout(new FlowLayout());
+        JPanel dashboardDisplayPanel = new JPanel();
+        dashboardDisplayPanel.setLayout(new BoxLayout(dashboardDisplayPanel, BoxLayout.Y_AXIS));
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+
 
         JButton inventoryButton = new JButton("View Inventory");
-        inventoryButton.addActionListener(e -> controller.goToInventoryClick(user));
-        add(inventoryButton);
+        inventoryButton.addActionListener(e -> controller.goToInventoryClick(appData, user, this));
+        buttonPanel.add(inventoryButton);
 
         if (user instanceof Customer) {
             JButton cartButton = new JButton("View Cart");
-            cartButton.addActionListener(e -> controller.goToCartClick(user, ((Customer) user).getShoppingCart()));
-            add(cartButton);
+            cartButton.addActionListener(e -> controller.goToCartClick(appData, user, ((Customer) user).getShoppingCart(), this));
+            buttonPanel.add(cartButton);
         }
 
         if (user instanceof Seller) {
             JButton salesButton = new JButton("View Sales");
-            salesButton.addActionListener(e -> controller.goToFinancialSummaryClick(user, ((Seller) user).getFinancialHistory()));
+            JButton listProductButton = new JButton("List New Product");
+            salesButton.addActionListener(e -> controller.goToFinancialSummaryClick(appData, user, ((Seller) user).getFinancialHistory(), this));
+            listProductButton.addActionListener(e -> controller.goToListProductClick(appData, user, this));
             add(salesButton);
+            buttonPanel.add(listProductButton);
         }
+        getContentPane().add(buttonPanel, BorderLayout.NORTH);
+        JScrollPane scrollPane = new JScrollPane(dashboardDisplayPanel);
+        add(scrollPane);
+
     }
 
     private User user;
+    private AppData appData;
     private DashboardController controller = new DashboardController();
 }
