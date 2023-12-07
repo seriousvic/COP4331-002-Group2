@@ -40,7 +40,13 @@ public class ProductDiscountView extends JFrame{
         panel.add(new JLabel("Discount Value: "));
         panel.add(discountValueField);
 
-        JButton applyDiscountButton = new JButton("Apply Discount");
+        int productQuantity = user.getShoppingCart().getQuantity(product);
+        String productName = product.getName();
+        String buttonText = "Apply Discount to " + productQuantity + " " +
+                (productQuantity > 1 ? productName + "'s" : productName);
+
+        JButton applyDiscountButton = new JButton(buttonText);
+
         applyDiscountButton.addActionListener(e -> {
             try {
                 double discountValue = Double.parseDouble(discountValueField.getText());

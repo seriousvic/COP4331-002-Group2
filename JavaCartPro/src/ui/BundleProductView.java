@@ -28,7 +28,7 @@ public class BundleProductView extends JFrame {
         nameLabel = new JLabel("Name: " + product.getName());
         sellerLabel = new JLabel("Seller: " + product.getSeller());
         descriptionLabel = new JLabel("Description: " + product.getDescription());
-        priceLabel = new JLabel("Price: " + product.getPrice());
+        priceLabel = new JLabel("Price: " + String.format("%.2f", product.getPrice()));
         stockLabel = new JLabel("Stock: " + product.getStock());
 
         panel.add(nameLabel);
