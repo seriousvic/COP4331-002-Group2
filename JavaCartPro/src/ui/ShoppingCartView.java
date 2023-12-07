@@ -54,13 +54,20 @@ public class ShoppingCartView extends JFrame {
             JSpinner quantitySpinner = new JSpinner(model);
             quantitySpinner.setEnabled(!(product instanceof BundleProduct));
 
+            if (product instanceof Product) {
+                Product regularProduct = (Product) product;
+                JButton applyDiscountButton = new JButton("Apply Discount");
+                applyDiscountButton.addActionListener(e -> controller.applyDiscountClick(appData, regularProduct, (Customer) user, this));
+                productPanel.add(applyDiscountButton);
+            }
+
             JButton removeButton = new JButton("Remove from cart");
             removeButton.addActionListener(e -> {
                 controller.removeFromCartClick(appData, product, (Customer) user);
                 refreshView();
             });
             JButton updateButton = new JButton("Update");
-            updateButton.setEnabled(!(product instanceof BundleProduct));
+            updateButton.setEnabled((product instanceof Product));
             updateButton.addActionListener(e -> {
                 int newQuantity = (Integer) quantitySpinner.getValue();
                 controller.updateQuantityClick(appData, product, newQuantity, (Customer) user);
@@ -76,9 +83,18 @@ public class ShoppingCartView extends JFrame {
             listPanel.add(productPanel);
         }
 
+
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new BorderLayout());
+
+        JLabel cartTotalLabel = new JLabel("Cart Total: $" + String.format("%.2f", shoppingCart.getTotal()));
+        cartTotalLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        bottomPanel.add(cartTotalLabel, BorderLayout.CENTER);
         JButton checkoutButton = new JButton("Checkout");
         //checkoutButton.addActionListener(e -> controller.checkout(appData, shoppingCart, user));
-        getContentPane().add(checkoutButton, BorderLayout.SOUTH);
+        bottomPanel.add(checkoutButton, BorderLayout.SOUTH);
+
+        getContentPane().add(bottomPanel, BorderLayout.SOUTH);
     }
 
     private List<ProductInterface> uniqueProducts(ShoppingCart shoppingCart) {
