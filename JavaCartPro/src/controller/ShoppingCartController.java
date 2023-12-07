@@ -46,6 +46,12 @@ public class ShoppingCartController {
         shoppingCartView.dispose();
     }
 
+    public void goToCheckoutClick(AppData appData, ShoppingCartView shoppingCartView, Customer user) {
+        DataManager.saveData(appData);
+        new CheckoutView(appData, user);
+        shoppingCartView.dispose();
+    }
+
     public void applyDiscountClick(AppData appData, ProductInterface product, Customer user, ShoppingCartView shoppingCartView) {
         new ProductDiscountView(appData, product, user, shoppingCartView).setVisible(true);
     }

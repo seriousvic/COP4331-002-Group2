@@ -1,5 +1,6 @@
 package JavaCartPro.src.ui;
 import JavaCartPro.src.model.*;
+import JavaCartPro.src.controller.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,13 +16,15 @@ public class FinancialSummary extends JFrame {
     private JLabel costsLabel;
     private AppData appData;
 
+    private FinancialSummaryController controller = new FinancialSummaryController();
+
     public FinancialSummary(AppData appData, User user, FinancialHistory financialHistory) {
         this.appData = appData;
         this.user = user;
         this.financialHistory = financialHistory;
 
         setTitle("Financial Summary");
-        setSize(400, 300);
+        setSize(800, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         initComponents();
@@ -46,6 +49,15 @@ public class FinancialSummary extends JFrame {
         add(revenueLabel);
         add(profitLabel);
         add(costsLabel);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        JButton dashboardButton = new JButton("Dashboard");
+        dashboardButton.addActionListener(e -> controller.dashboardClick(appData, user, this));
+        buttonPanel.add(dashboardButton);
+        add(buttonPanel, BorderLayout.SOUTH);
+
+        setVisible(true);
     }
 
     private void calculateSummary() {
@@ -69,9 +81,9 @@ public class FinancialSummary extends JFrame {
 
     private void displayTransaction(Transaction transaction) {
         transactionTextArea.append("\nTransaction Details:\n");
-        transactionTextArea.append("User: " + transaction.getUser().getUsername() + "\n");
+        transactionTextArea.append("User: " + transaction.getCustomer().getUsername() + "\n");
         transactionTextArea.append("Products:\n");
-        for (Product product : transaction.getProducts()) {
+        for (ProductInterface product : transaction.getProducts()) {
             transactionTextArea.append("- " + product.getName() + ": $" + product.getPrice() + "\n");
         }
         transactionTextArea.append("Total Sales: $" + transaction.getTotalSales() + "\n");

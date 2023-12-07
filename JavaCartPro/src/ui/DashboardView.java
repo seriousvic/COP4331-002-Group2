@@ -49,6 +49,12 @@ public class DashboardView extends JFrame {
         JScrollPane scrollPane = new JScrollPane(dashboardDisplayPanel);
         add(scrollPane);
 
+        if (user instanceof Seller) {
+            JButton summaryButton = new JButton("View Financial Summary");
+            summaryButton.addActionListener(e -> controller.goToFinancialSummaryClick(appData, user, ((Seller) user).getFinancialHistory(), this));
+            buttonPanel.add(summaryButton);
+        }
+
     }
 
     private User user;

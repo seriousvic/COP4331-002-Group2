@@ -44,6 +44,10 @@ public class ShoppingCart implements Serializable {
         return total;
     }
 
+    public void clearCart() {
+        items.clear();
+    }
+
     public List<ProductInterface> getItems() {
         return items;
     }
