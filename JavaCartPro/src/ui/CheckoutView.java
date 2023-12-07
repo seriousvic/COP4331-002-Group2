@@ -4,15 +4,12 @@ import JavaCartPro.src.model.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
-
-import static javax.swing.BoxLayout.Y_AXIS;
 
 public class CheckoutView extends JFrame {
     private Customer customer;
     private AppData appData;
+    private Payment payment = new Payment();
 
     private CheckoutController controller = new CheckoutController();
 
@@ -30,8 +27,10 @@ public class CheckoutView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 400);
 
+        JPanel mainPanel = new JPanel(new BorderLayout());
+
         JPanel itemPanel = new JPanel();
-        itemPanel.setLayout(new BoxLayout(itemPanel, Y_AXIS));
+        itemPanel.setLayout(new BoxLayout(itemPanel, BoxLayout.Y_AXIS));
         List<ProductInterface> cartItems = customer.getShoppingCart().getItems();
 
         for (ProductInterface item : cartItems) {
@@ -39,15 +38,44 @@ public class CheckoutView extends JFrame {
             itemPanel.add(new JLabel("$" + item.getPrice()));
         }
 
+        JPanel itemListAndTotalPanel = new JPanel(new GridLayout(0, 1));
+        itemListAndTotalPanel.add(itemPanel);
+
         JLabel totalLabel = new JLabel("Total: $" + calculateTotalPrice(cartItems));
+        totalLabel.setHorizontalAlignment(JLabel.CENTER);
+        itemListAndTotalPanel.add(totalLabel);
+
+        // Create text fields for credit card information
+        JTextField cardNumberField = new JTextField();
+        JTextField expirationField = new JTextField();
+        JTextField ccvField = new JTextField();
+
+        JPanel paymentPanel = new JPanel();
+        paymentPanel.setLayout(new GridLayout(3, 2)); // 3 rows, 2 columns
+
+        paymentPanel.add(new JLabel("Card Number:"));
+        paymentPanel.add(cardNumberField);
+        paymentPanel.add(new JLabel("Expiration Date:"));
+        paymentPanel.add(expirationField);
+        paymentPanel.add(new JLabel("CVV:"));
+        paymentPanel.add(ccvField);
 
         JButton checkoutButton = new JButton("Checkout");
-        checkoutButton.addActionListener(e -> controller.performCheckout(appData, cartItems, customer, CheckoutView.this));
+        checkoutButton.addActionListener(e -> {
+            // Set payment information in the Payment object
+            payment.setCardNumber(cardNumberField.getText());
+            payment.setExpirationMonth(expirationField.getText());
+            payment.setCcv(ccvField.getText());
 
-        add(itemPanel, BorderLayout.CENTER);
-        add(totalLabel, BorderLayout.SOUTH);
-        add(checkoutButton, BorderLayout.EAST);
+            // Perform checkout with credit card information
+            controller.performCheckout(appData, cartItems, customer, CheckoutView.this, payment);
+        });
 
+        mainPanel.add(itemListAndTotalPanel, BorderLayout.WEST);
+        mainPanel.add(paymentPanel, BorderLayout.EAST);
+        mainPanel.add(checkoutButton, BorderLayout.SOUTH);
+
+        add(mainPanel);
         setLocationRelativeTo(null);
         setVisible(true);
     }

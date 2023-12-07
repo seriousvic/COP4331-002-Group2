@@ -36,7 +36,7 @@ public class FinancialSummary extends JFrame {
         transactionTextArea = new JTextArea(10, 30);
         transactionTextArea.setEditable(false);
 
-        totalSalesLabel = new JLabel("Total Sales: $0.00");
+        totalSalesLabel = new JLabel("Total Sales: 0");
         revenueLabel = new JLabel("Revenue: $0.00");
         profitLabel = new JLabel("Profit: $0.00");
         costsLabel = new JLabel("Costs: $0.00");
@@ -69,7 +69,7 @@ public class FinancialSummary extends JFrame {
         double profit = financialHistory.getTotalProfit();
         double costs = financialHistory.getTotalCosts();
 
-        totalSalesLabel.setText("Total Sales: $" + String.format("%.2f", totalSales));
+        totalSalesLabel.setText("Total Sales: " + String.format("%.2f", totalSales));
         revenueLabel.setText("Revenue: $" + String.format("%.2f", revenue));
         profitLabel.setText("Profit: $" + String.format("%.2f", profit));
         costsLabel.setText("Costs: $" + String.format("%.2f", costs));
