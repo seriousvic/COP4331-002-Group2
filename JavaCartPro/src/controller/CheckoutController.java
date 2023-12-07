@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.util.List;
 
 public class CheckoutController {
-    public void performCheckout(List<ProductInterface> cartItems, Customer customer, CheckoutView checkoutView) {
+    public void performCheckout(AppData appData, List<ProductInterface> cartItems, Customer customer, CheckoutView checkoutView) {
         for (ProductInterface item : cartItems) {
             // Retrieve the seller from each product
             Seller seller = item.getSellerAccount();
@@ -23,6 +23,8 @@ public class CheckoutController {
 
         // Display a confirmation message
         JOptionPane.showMessageDialog(checkoutView, "Checkout successful!");
+        DataManager.saveData(appData);
+
 
         // Close the checkout screen
         checkoutView.dispose();

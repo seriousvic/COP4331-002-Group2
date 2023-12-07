@@ -26,6 +26,7 @@ public class FinancialSummary extends JFrame {
         setTitle("Financial Summary");
         setSize(800, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
 
         initComponents();
         calculateSummary();

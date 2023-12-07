@@ -42,12 +42,7 @@ public class CheckoutView extends JFrame {
         JLabel totalLabel = new JLabel("Total: $" + calculateTotalPrice(cartItems));
 
         JButton checkoutButton = new JButton("Checkout");
-        checkoutButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controller.performCheckout(cartItems, customer, CheckoutView.this);
-            }
-        });
+        checkoutButton.addActionListener(e -> controller.performCheckout(appData, cartItems, customer, CheckoutView.this));
 
         add(itemPanel, BorderLayout.CENTER);
         add(totalLabel, BorderLayout.SOUTH);
