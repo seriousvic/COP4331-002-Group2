@@ -16,6 +16,9 @@ public class ShoppingCartController {
         if (product instanceof Product) {
             Product regularProduct = (Product) product;
             new ProductView(appData, regularProduct, user).setVisible(true);
+        } else if (product instanceof FlatProductDecorator || product instanceof PercentageProductDecorator) {
+            ProductInterface decoratedProduct = (ProductInterface) product;
+            new ProductView(appData, decoratedProduct, user).setVisible(true);
         } else if (product instanceof BundleProduct) {
             BundleProduct bundleProduct = (BundleProduct) product;
             new BundleProductView(appData, bundleProduct, user, shoppingCartView).setVisible(true);
@@ -41,5 +44,9 @@ public class ShoppingCartController {
         DataManager.saveData(appData);
         new InventoryView(appData, user);
         shoppingCartView.dispose();
+    }
+
+    public void applyDiscountClick(AppData appData, ProductInterface product, Customer user, ShoppingCartView shoppingCartView) {
+        new ProductDiscountView(appData, product, user, shoppingCartView).setVisible(true);
     }
 }

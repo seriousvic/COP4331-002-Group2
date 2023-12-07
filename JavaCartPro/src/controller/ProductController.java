@@ -5,8 +5,16 @@ import JavaCartPro.src.ui.*;
 
 public class ProductController {
     public void addToCartClick(AppData appData, ProductInterface product, int quantity, ShoppingCart shoppingCart){
-        shoppingCart.addProduct(product, quantity);
-        DataManager.saveData(appData);
+        boolean alreadyContainsDiscountedProduct = shoppingCart.getItems().stream()
+                .anyMatch(cartItem ->
+                        cartItem.getName().equals(product.getName()) &&
+                                cartItem.getSeller().equals(product.getSeller()) &&
+                                cartItem instanceof ProductDecorator
+                );
+        if (!alreadyContainsDiscountedProduct) {
+            shoppingCart.addProduct(product, quantity);
+            DataManager.saveData(appData);
+        }
     }
     public void addToBundleClick(AppData appData, ProductInterface productInterface, ShoppingCart shoppingCart) {
         if (!(productInterface instanceof Product)) {
