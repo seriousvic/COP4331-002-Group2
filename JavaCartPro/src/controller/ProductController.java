@@ -12,7 +12,17 @@ public class ProductController {
                                 cartItem instanceof ProductDecorator
                 );
         if (!alreadyContainsDiscountedProduct) {
-            shoppingCart.addProduct(product, quantity);
+            int currentQuantity = shoppingCart.getQuantity(product);
+            int totalQuantity = currentQuantity + quantity;
+            if (shoppingCart.getItems().contains(product)) {
+                if (totalQuantity > product.getStock()) {
+                    shoppingCart.addProduct(product, product.getStock() - currentQuantity);
+                } else {
+                    shoppingCart.addProduct(product, quantity);
+                }
+            } else {
+                shoppingCart.addProduct(product, quantity);
+            }
             DataManager.saveData(appData);
         }
     }
