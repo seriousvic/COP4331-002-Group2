@@ -66,10 +66,10 @@ public class FinancialSummary extends JFrame {
 
         double totalSales = financialHistory.getTotalSales();
         double revenue = financialHistory.getTotalRevenue();
-        double profit = financialHistory.getTotalProfit();
-        double costs = financialHistory.getTotalCosts();
+        double profit = financialHistory.getTotalProfit(appData);
+        double costs = financialHistory.getTotalCosts(appData);
 
-        totalSalesLabel.setText("Total Sales: $" + String.format("%.2f", totalSales));
+        totalSalesLabel.setText("Total Sales: " + String.format("%.0f", totalSales));
         revenueLabel.setText("Revenue: $" + String.format("%.2f", revenue));
         profitLabel.setText("Profit: $" + String.format("%.2f", profit));
         costsLabel.setText("Costs: $" + String.format("%.2f", costs));

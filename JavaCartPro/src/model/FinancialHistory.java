@@ -9,7 +9,10 @@ public class FinancialHistory implements Serializable {
     private static final long serialVersionUID = 11123L;
     private List<Transaction> transactions;
 
-    public FinancialHistory() {
+    private Seller seller;
+
+    public FinancialHistory(Seller seller) {
+        this.seller = seller;
         this.transactions = new ArrayList<>();
     }
 
@@ -39,19 +42,34 @@ public class FinancialHistory implements Serializable {
         return totalRevenue;
     }
 
-    public double getTotalProfit() {
+    public double getTotalProfit(AppData appData) {
         double totalProfit = 0;
+        double totalCosts = this.getTotalCosts(appData);
         for (Transaction transaction : transactions) {
-            totalProfit += transaction.getRevenue() - transaction.getCosts();
+            totalProfit += transaction.getRevenue();
         }
+        totalProfit -= totalCosts;
         return totalProfit;
     }
 
-    public double getTotalCosts() {
+
+    public double getTotalCosts(AppData appData) {
         double totalCosts = 0;
-        for (Transaction transaction : transactions) {
-            totalCosts += transaction.getCosts();
+        for (ProductInterface product : appData.getInventory().getProducts()) {
+            if (product.getSeller().equals(seller.getUsername())) {
+                totalCosts += product.getPrice() * product.getStock();
+            }
         }
         return totalCosts;
+
     }
 }
+
+//    public double getTotalCosts() {
+//        double totalCosts = 0;
+//        for (Transaction transaction : transactions) {
+//            totalCosts += transaction.getCosts();
+//        }
+//        return totalCosts;
+//    }
+//}
