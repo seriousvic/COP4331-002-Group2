@@ -2,6 +2,7 @@ package JavaCartPro.src.model;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public class Seller extends User implements Serializable {
      */
     public Seller(String username, String password) {
         super(username, password, "SELLER");
-        financialHistory = new FinancialHistory();
+        financialHistory = new FinancialHistory(this);
     }
 
     public FinancialHistory getFinancialHistory() {
@@ -62,6 +63,12 @@ public class Seller extends User implements Serializable {
      * @return a list of products in the seller's inventory
      */
     public List<ProductInterface> getInventory() {
-        return Inventory.getInstance().getProducts();
+        List <ProductInterface> products = new ArrayList<>();
+        for (ProductInterface product : Inventory.getInstance().getProducts()) {
+            if (product.getSeller().equals(this.getUsername())) {
+                products.add(product);
+            }
+        }
+        return products;
     }
 }
