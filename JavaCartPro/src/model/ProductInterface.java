@@ -10,4 +10,5 @@ public interface ProductInterface {
     void setPrice(double price);
     int getStock();
     void setStock(int stock);
+    Seller getSellerAccount();
 }

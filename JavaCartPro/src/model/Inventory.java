@@ -17,13 +17,13 @@ public class Inventory implements Serializable {
         return instance;
     }
 
-    public void addProduct(String seller, String name, String description, double price, int stock){
+    public void addProduct(Seller sellerAccount, String seller, String name, String description, double price, int stock){
         for (ProductInterface product : products){
             if (product.getName().equals(name) && product.getSeller().equals(seller)){
                 return;
             }
         }
-        Product newProduct = new Product(seller, name, description, price, stock);
+        Product newProduct = new Product(sellerAccount, seller, name, description, price, stock);
         products.add(newProduct);
     }
 

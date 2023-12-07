@@ -57,7 +57,7 @@ public class ListProductView extends JFrame {
             int quantity = Integer.parseInt(quantityField.getText());
 
             if (!name.isEmpty() && !description.isEmpty() && price > 0 && quantity > 0) {
-                controller.listProductClick(appData, user.getUsername(), name, description, price, quantity);
+                controller.listProductClick(appData, (Seller) user, user.getUsername(), name, description, price, quantity);
                 JOptionPane.showMessageDialog(this, "Product listed successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 //controller.goToDashboardClick(appData, user, this);
             } else {

@@ -8,6 +8,7 @@ public class BundleProduct implements ProductInterface, Serializable {
 
     public BundleProduct(Product product) {
         this.products.add(product);
+        this.sellerAccount = product.getSellerAccount();
         this.name = product.getSeller() + "'s Product Bundle";
         this.description = "A bundle of products from " + product.getSeller() + " containing" + product.getName() + ".";
         this.price = product.getPrice();
@@ -106,6 +107,10 @@ public class BundleProduct implements ProductInterface, Serializable {
     }
 
 
+    public Seller getSellerAccount() {
+        return this.sellerAccount;
+    }
+    private final Seller sellerAccount;
     private List<ProductInterface> products = new ArrayList<>();
     private final String name;
     private String description;
