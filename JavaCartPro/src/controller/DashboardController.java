@@ -27,4 +27,9 @@ public class DashboardController {
         DataManager.saveData(appData);
         new ListProductView(appData, user);
     }
+
+    public void logoutClick(DashboardView dashboardView) {
+        new ShoppingCartApp().setVisible(true);
+        dashboardView.dispose();
+    }
 }
