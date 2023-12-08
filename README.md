@@ -48,7 +48,7 @@ https://youtu.be/LT2zXp8IeVM
 
 ## Instructions on how to run the application
 
-To run the application you must go to the out\artifacts\Final_Project_jar directory and open the Final-Project.jar application
+To run the application you must go to the ShoppingCartApp.java and run it
 
 ## Contributors
 
