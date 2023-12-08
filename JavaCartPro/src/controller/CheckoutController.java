@@ -15,9 +15,7 @@ public class CheckoutController {
             if (discountType.equals("Percent")) {
                 shoppingCart.applyDiscount(new PercentDiscount(), discountAmount);
 
-            }
-
-            if (discountType.equals("Flat")) {
+            } else if (discountType.equals("Flat")) {
                 shoppingCart.applyDiscount(new FlatDiscount(), discountAmount);
             }
 
