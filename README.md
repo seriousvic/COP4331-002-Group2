@@ -44,11 +44,11 @@ This Java Shopping Cart application is a simple application that allows customer
 
 ## Application Demo
 
-Youtube Link Placeholder
+https://youtu.be/LT2zXp8IeVM
 
 ## Instructions on how to run the application
 
-Placeholder info
+To run the application you must go to the out\artifacts\Final_Project_jar directory and open the Final-Project.jar application
 
 ## Contributors
 
