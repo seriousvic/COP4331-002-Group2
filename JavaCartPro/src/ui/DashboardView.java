@@ -55,6 +55,11 @@ public class DashboardView extends JFrame {
             buttonPanel.add(summaryButton);
         }
 
+        JButton logOutButton = new JButton("Logout");
+        logOutButton.addActionListener(e -> controller.logoutClick(this));
+        buttonPanel.add(logOutButton);
+
+
     }
 
     private User user;

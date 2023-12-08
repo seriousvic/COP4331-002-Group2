@@ -41,7 +41,7 @@ public class InventoryView extends JFrame {
 
         List<ProductInterface> products = appData.getInventory().getProducts();
         for (ProductInterface product : products) {
-            if (user instanceof Customer || (user instanceof Seller && product.getSeller().equals(user.getUsername()))) {
+            if (user instanceof Customer && (product.getStock() > 0) || (user instanceof Seller && product.getSeller().equals(user.getUsername()))) {
                 JPanel productPanel = new JPanel();
                 productPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
                 JButton productNameButton = new JButton(product.getName());
@@ -49,11 +49,22 @@ public class InventoryView extends JFrame {
                 productPanel.add(productNameButton);
                 productPanel.add(new JLabel("Seller: " + product.getSeller()));
                 productPanel.add(new JLabel("$" + String.format("%.2f", product.getPrice())));
+                if (user instanceof Seller) {
+                    JButton removeProductButton = new JButton("Remove Product");
+                    removeProductButton.addActionListener(e -> controller.removeProductClick(appData, (Seller) user, (Product) product, this));
+                    productPanel.add(removeProductButton);
+                }
                 listProductPanel.add(productPanel);
             }
         }
     }
 
+    public void refreshView() {
+        getContentPane().removeAll();
+        startUI();
+        revalidate();
+        repaint();
+    }
 
     private AppData appData;
 //    private Inventory inventory;

@@ -54,6 +54,14 @@ public class ShoppingCartView extends JFrame {
             JSpinner quantitySpinner = new JSpinner(model);
             quantitySpinner.setEnabled(!(product instanceof BundleProduct));
 
+            if (product instanceof Product) {
+                Product regularProduct = (Product) product;
+                JButton applyDiscountButton = new JButton("Apply Discount");
+                applyDiscountButton.addActionListener(e -> controller.applyDiscountClick(appData, regularProduct, (Customer) user, this));
+                productPanel.add(applyDiscountButton);
+            }
+
+
             JButton removeButton = new JButton("Remove from cart");
             removeButton.addActionListener(e -> {
                 controller.removeFromCartClick(appData, product, (Customer) user);

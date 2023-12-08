@@ -95,6 +95,12 @@ public class BundleProduct implements ProductInterface, Serializable {
         return this.cost;
     }
 
+    public void oneSale(){
+        for (ProductInterface product : products){
+            product.oneSale();
+        }
+    }
+
     public String getSeller(){
         return this.seller;
     }

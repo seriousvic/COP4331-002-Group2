@@ -19,7 +19,7 @@ public class CheckoutController {
                 seller.getFinancialHistory().addTransaction(transaction);
 
                 // Remove each product from the seller's inventory
-                Inventory.getInstance().removeProduct(item.getName(), seller.getUsername());
+                item.oneSale();
             }
 
             // Clear the customer's shopping cart after checkout

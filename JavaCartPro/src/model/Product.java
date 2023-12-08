@@ -53,6 +53,10 @@ public class Product implements ProductInterface, Serializable {
         return this.sellerAccount;
     }
 
+    public void oneSale() {
+        this.stock -= 1;
+    }
+
     private final String seller;
     private final double cost;
     private final Seller sellerAccount;
