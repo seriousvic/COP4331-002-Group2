@@ -49,11 +49,22 @@ public class InventoryView extends JFrame {
                 productPanel.add(productNameButton);
                 productPanel.add(new JLabel("Seller: " + product.getSeller()));
                 productPanel.add(new JLabel("$" + String.format("%.2f", product.getPrice())));
+                if (user instanceof Seller) {
+                    JButton removeProductButton = new JButton("Remove Product");
+                    removeProductButton.addActionListener(e -> controller.removeProductClick(appData, (Seller) user, (Product) product, this));
+                    productPanel.add(removeProductButton);
+                }
                 listProductPanel.add(productPanel);
             }
         }
     }
 
+    public void refreshView() {
+        getContentPane().removeAll();
+        startUI();
+        revalidate();
+        repaint();
+    }
 
     private AppData appData;
 //    private Inventory inventory;

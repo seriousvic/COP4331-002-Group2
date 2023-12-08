@@ -20,4 +20,10 @@ public class InventoryController {
         new ShoppingCartView(appData, shoppingCart, user);
         inventoryView.dispose();
     }
+
+    public void removeProductClick(AppData appData, Seller seller, Product product, InventoryView inventoryView) {
+        appData.getInventory().removeProduct(product.getName(), seller.getUsername());
+        DataManager.saveData(appData);
+        inventoryView.refreshView();
+    }
 }
