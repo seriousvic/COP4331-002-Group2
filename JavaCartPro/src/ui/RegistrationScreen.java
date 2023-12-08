@@ -154,18 +154,6 @@ public class RegistrationScreen extends JFrame {
     }
 
     /**
-     * Saves a new user to the user data file
-     * @param user The user to be saved
-     */
-//    private void saveUser(User user) {
-//        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(USERS_FILE_PATH, true))) {
-//            oos.writeObject(user);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-    /**
      * The main method to launch the RegistrationScreen
      * @param args Command-line arguments
      */

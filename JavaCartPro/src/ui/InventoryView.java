@@ -7,8 +7,15 @@ import JavaCartPro.src.controller.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * inventory screen
+ */
 public class InventoryView extends JFrame {
-
+    /**
+     * constructor
+     * @param appData data stored by the program
+     * @param user user viewing inventory
+     */
     public InventoryView(AppData appData, User user) {
         this.appData = appData;
         this.user = user;
@@ -20,6 +27,9 @@ public class InventoryView extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * start user interface
+     */
     private void startUI() {
         JPanel listProductPanel = new JPanel();
         listProductPanel.setLayout(new BoxLayout(listProductPanel, BoxLayout.Y_AXIS));
@@ -41,7 +51,7 @@ public class InventoryView extends JFrame {
 
         List<ProductInterface> products = appData.getInventory().getProducts();
         for (ProductInterface product : products) {
-            if (user instanceof Customer || (user instanceof Seller && product.getSeller().equals(user.getUsername()))) {
+            if (user instanceof Customer && (product.getStock() > 0) || (user instanceof Seller && product.getSeller().equals(user.getUsername()))) {
                 JPanel productPanel = new JPanel();
                 productPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
                 JButton productNameButton = new JButton(product.getName());
@@ -49,14 +59,27 @@ public class InventoryView extends JFrame {
                 productPanel.add(productNameButton);
                 productPanel.add(new JLabel("Seller: " + product.getSeller()));
                 productPanel.add(new JLabel("$" + String.format("%.2f", product.getPrice())));
+                if (user instanceof Seller) {
+                    JButton removeProductButton = new JButton("Remove Product");
+                    removeProductButton.addActionListener(e -> controller.removeProductClick(appData, (Seller) user, (Product) product, this));
+                    productPanel.add(removeProductButton);
+                }
                 listProductPanel.add(productPanel);
             }
         }
     }
 
+    /**
+     * refresh window
+     */
+    public void refreshView() {
+        getContentPane().removeAll();
+        startUI();
+        revalidate();
+        repaint();
+    }
 
     private AppData appData;
-//    private Inventory inventory;
     private User user;
     private InventoryController controller = new InventoryController();
 }

@@ -2,7 +2,14 @@ package JavaCartPro.src.model;
 
 import java.io.*;
 
+/**
+ * class to manage data
+ */
 public class DataManager {
+    /**
+     * function to save data
+     * @param appData data to be saved
+     */
     public static void saveData(AppData appData) {
         try (ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(data))){
             output.writeObject(appData);
@@ -11,6 +18,10 @@ public class DataManager {
         }
     }
 
+    /**
+     * function to load data
+     * @return data stored by the program
+     */
     public static AppData loadData() {
         AppData appData = null;
         File file = new File(data);

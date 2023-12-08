@@ -6,8 +6,15 @@ import JavaCartPro.src.controller.*;
 
 import java.awt.*;
 
+/**
+ * dashboard screen
+ */
 public class DashboardView extends JFrame {
-
+    /**
+     * constructor
+     * @param appData data stored by the program
+     * @param user user viewing dashboard
+     */
     public DashboardView(AppData appData, User user) {
         this.appData = appData;
         this.user = user;
@@ -20,6 +27,9 @@ public class DashboardView extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * start user interface
+     */
     public void startUI() {
         JPanel dashboardDisplayPanel = new JPanel();
         dashboardDisplayPanel.setLayout(new BoxLayout(dashboardDisplayPanel, BoxLayout.Y_AXIS));
@@ -48,6 +58,17 @@ public class DashboardView extends JFrame {
         getContentPane().add(buttonPanel, BorderLayout.NORTH);
         JScrollPane scrollPane = new JScrollPane(dashboardDisplayPanel);
         add(scrollPane);
+
+        if (user instanceof Seller) {
+            JButton summaryButton = new JButton("View Financial Summary");
+            summaryButton.addActionListener(e -> controller.goToFinancialSummaryClick(appData, user, ((Seller) user).getFinancialHistory(), this));
+            buttonPanel.add(summaryButton);
+        }
+
+        JButton logOutButton = new JButton("Logout");
+        logOutButton.addActionListener(e -> controller.logoutClick(this));
+        buttonPanel.add(logOutButton);
+
 
     }
 

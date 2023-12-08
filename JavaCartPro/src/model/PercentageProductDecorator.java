@@ -1,12 +1,23 @@
 package JavaCartPro.src.model;
 
+/**
+ * decorator for percentage-based discount
+ */
 public class PercentageProductDecorator extends ProductDecorator {
-
+    /**
+     * constructor
+     * @param product product being discounted
+     * @param percentage percentage to discount by
+     */
     public PercentageProductDecorator(ProductInterface product, double percentage) {
         super(product);
         this.percentage = percentage / 100;
     }
 
+    /**
+     * get function for price
+     * @return discounted price
+     */
     public double getPrice() {
         if (super.getPrice() * (1 - percentage) < 0) {
             return 0;
@@ -14,6 +25,10 @@ public class PercentageProductDecorator extends ProductDecorator {
         return super.getPrice() * (1 - percentage);
     }
 
+    /**
+     * get function for description
+     * @return discount description
+     */
     public String getDescription() {
         if (super.getPrice() * (1 - percentage) < 0) {
             return super.getDescription() + " - 100% off each";

@@ -8,7 +8,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * shopping cart view
+ */
 public class ShoppingCartView extends JFrame {
+    /**
+     * constructor
+     * @param appData data stored by the program
+     * @param shoppingCart customer's shopping cart
+     * @param user user viewing shopping cart
+     */
     public ShoppingCartView(AppData appData, ShoppingCart shoppingCart, User user) {
         this.appData = appData;
         this.shoppingCart = shoppingCart;
@@ -21,6 +30,9 @@ public class ShoppingCartView extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * start user interface
+     */
     public void startUI() {
         setTitle("Shopping Cart");
         setSize(800, 400);
@@ -61,13 +73,14 @@ public class ShoppingCartView extends JFrame {
                 productPanel.add(applyDiscountButton);
             }
 
+
             JButton removeButton = new JButton("Remove from cart");
             removeButton.addActionListener(e -> {
                 controller.removeFromCartClick(appData, product, (Customer) user);
                 refreshView();
             });
             JButton updateButton = new JButton("Update");
-            updateButton.setEnabled((product instanceof Product));
+            updateButton.setEnabled(!(product instanceof BundleProduct));
             updateButton.addActionListener(e -> {
                 int newQuantity = (Integer) quantitySpinner.getValue();
                 controller.updateQuantityClick(appData, product, newQuantity, (Customer) user);
@@ -83,20 +96,16 @@ public class ShoppingCartView extends JFrame {
             listPanel.add(productPanel);
         }
 
-
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.setLayout(new BorderLayout());
-
-        JLabel cartTotalLabel = new JLabel("Cart Total: $" + String.format("%.2f", shoppingCart.getTotal()));
-        cartTotalLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        bottomPanel.add(cartTotalLabel, BorderLayout.CENTER);
         JButton checkoutButton = new JButton("Checkout");
-        //checkoutButton.addActionListener(e -> controller.checkout(appData, shoppingCart, user));
-        bottomPanel.add(checkoutButton, BorderLayout.SOUTH);
-
-        getContentPane().add(bottomPanel, BorderLayout.SOUTH);
+        checkoutButton.addActionListener(e -> controller.goToCheckoutClick(appData, this, (Customer) user));
+        getContentPane().add(checkoutButton, BorderLayout.SOUTH);
     }
 
+    /**
+     * list unique products
+     * @param shoppingCart shopping cart to list products in
+     * @return list of unique products
+     */
     private List<ProductInterface> uniqueProducts(ShoppingCart shoppingCart) {
         List<ProductInterface> uniqueProducts = new ArrayList<>();
 
@@ -109,6 +118,12 @@ public class ShoppingCartView extends JFrame {
         return uniqueProducts;
     }
 
+    /**
+     * checks to see if the shopping cart contains a product
+     * @param productList list of products in shopping cart
+     * @param productToCheck product to check for uniqueness
+     * @return true or false
+     */
     private boolean containsProduct(List<ProductInterface> productList, ProductInterface productToCheck) {
         for (ProductInterface product : productList) {
             if (product.getName().equals(productToCheck.getName()) && product.getSeller().equals(productToCheck.getSeller())) {
@@ -118,7 +133,9 @@ public class ShoppingCartView extends JFrame {
         return false;
     }
 
-
+    /**
+     * refresh window
+     */
     public void refreshView() {
         getContentPane().removeAll();
         startUI();

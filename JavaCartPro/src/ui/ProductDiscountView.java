@@ -6,9 +6,17 @@ import JavaCartPro.src.controller.*;
 
 import java.awt.*;
 
-
+/**
+ * product discount screen
+ */
 public class ProductDiscountView extends JFrame{
-
+    /**
+     * constructor
+     * @param appData data stored by the program
+     * @param product product being discounted
+     * @param user user discounting product
+     * @param shoppingCartView shopping cart screen
+     */
     public ProductDiscountView(AppData appData, ProductInterface product, Customer user, ShoppingCartView shoppingCartView) {
         this.shoppingCartView = shoppingCartView;
         this.appData = appData;
@@ -19,6 +27,9 @@ public class ProductDiscountView extends JFrame{
         startUI();
     }
 
+    /**
+     * start user interface
+     */
     private void startUI() {
         setTitle("Apply Discount");
         setSize(400, 300);
@@ -66,12 +77,6 @@ public class ProductDiscountView extends JFrame{
         setVisible(true);
     }
 
-//    private void refreshView() {
-//        getContentPane().removeAll();
-//        startUI();
-//        revalidate();
-//        repaint();
-//    }
     private AppData appData;
     private int quantity;
     private ShoppingCartView shoppingCartView;

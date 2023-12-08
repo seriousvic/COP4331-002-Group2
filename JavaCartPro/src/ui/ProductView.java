@@ -5,8 +5,16 @@ import JavaCartPro.src.controller.*;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * product screen
+ */
 public class ProductView extends JFrame {
-
+    /**
+     * constructor
+     * @param appData data stored by the program
+     * @param product product being viewed
+     * @param user user viewing product
+     */
     public ProductView(AppData appData, ProductInterface product, User user) {
         this.appData = appData;
         this.product = product;
@@ -14,6 +22,9 @@ public class ProductView extends JFrame {
         startUI();
     }
 
+    /**
+     * start user interface
+     */
     private void startUI() {
         setTitle("Product Details");
         setSize(400, 300);
@@ -52,6 +63,7 @@ public class ProductView extends JFrame {
         }
 
         if (user instanceof Seller) {
+            costLabel = new JLabel("Cost: " + String.format("%.2f", product.getCost()));
             updateButton = new JButton("Update Product");
             updateButton.addActionListener(e -> controller.updateProductClick(appData, product, descriptionField.getText(), Double.parseDouble(priceField.getText()), Integer.parseInt(stockField.getText())));
             panel.add(new JLabel("Description:"));
@@ -79,6 +91,7 @@ public class ProductView extends JFrame {
     private JLabel descriptionLabel;
     private JLabel priceLabel;
     private JLabel stockLabel;
+    private JLabel costLabel;
     private JButton addToCart;
     private JButton createBundle;
     private JButton toInventoryButton;

@@ -6,8 +6,15 @@ import JavaCartPro.src.controller.*;
 
 import java.awt.*;
 
+/**
+ * list of products screen
+ */
 public class ListProductView extends JFrame {
-
+    /**
+     * constructor
+     * @param appData data stored by the program
+     * @param user user viewing products
+     */
     public ListProductView(AppData appData, User user) {
         this.appData = appData;
         this.user = user;
@@ -15,6 +22,9 @@ public class ListProductView extends JFrame {
         startUI();
     }
 
+    /**
+     * start user interface
+     */
     private void startUI() {
         setTitle("List New Product");
         setSize(400, 300);
@@ -26,6 +36,7 @@ public class ListProductView extends JFrame {
 
         nameField = new JTextField(20);
         descriptionField = new JTextField(20);
+        costField = new JTextField(20);
         priceField = new JTextField(20);
         quantityField = new JTextField(20);
 
@@ -34,6 +45,9 @@ public class ListProductView extends JFrame {
 
         contentPane.add(new JLabel("Description: "));
         contentPane.add(descriptionField);
+
+        contentPane.add(new JLabel("Cost: "));
+        contentPane.add(costField);
 
         contentPane.add(new JLabel("Price: "));
         contentPane.add(priceField);
@@ -49,15 +63,19 @@ public class ListProductView extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * button click
+     */
     private void listProductClick() {
         try {
             String name = nameField.getText();
             String description = descriptionField.getText();
+            double cost = Double.parseDouble(costField.getText());
             double price = Double.parseDouble(priceField.getText());
             int quantity = Integer.parseInt(quantityField.getText());
 
             if (!name.isEmpty() && !description.isEmpty() && price > 0 && quantity > 0) {
-                controller.listProductClick(appData, user.getUsername(), name, description, price, quantity);
+                controller.listProductClick(appData, (Seller) user, user.getUsername(), name, description, cost, price, quantity);
                 JOptionPane.showMessageDialog(this, "Product listed successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 //controller.goToDashboardClick(appData, user, this);
             } else {
@@ -72,8 +90,9 @@ public class ListProductView extends JFrame {
 
 
     private AppData appData;
+    private double cost;
     private User user;
     private ListProductController controller;
     private JButton listProductButton;
-    private JTextField nameField, priceField, quantityField, descriptionField;
+    private JTextField nameField, costField, priceField, quantityField, descriptionField;
 }

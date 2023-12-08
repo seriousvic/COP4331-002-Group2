@@ -4,25 +4,45 @@ import java.util.List;
 import java.io.Serializable;
 import java.io.Serial;
 
+/**
+ * class representing the financial history of a seller
+ */
 public class FinancialHistory implements Serializable {
     @Serial
     private static final long serialVersionUID = 11123L;
     private List<Transaction> transactions;
 
-    public FinancialHistory() {
+    private Seller seller;
+
+    /**
+     * constructor
+     * @param seller seller to construct history of
+     */
+    public FinancialHistory(Seller seller) {
+        this.seller = seller;
         this.transactions = new ArrayList<>();
     }
 
-    // Add a transaction to the financial history
+    /**
+     * add transaction to history
+     * @param transaction transaction to be added
+     */
     public void addTransaction(Transaction transaction) {
         transactions.add(transaction);
     }
 
-    // Get the list of transactions
+    /**
+     * get functiuon for transactions
+     * @return a list of the seller's transactions
+     */
     public List<Transaction> getTransactions() {
         return transactions;
     }
 
+    /**
+     * get function for total sales
+     * @return total sales
+     */
     public int getTotalSales() {
         int totalSales = 0;
         for (Transaction transaction : transactions) {
@@ -31,6 +51,10 @@ public class FinancialHistory implements Serializable {
         return totalSales;
     }
 
+    /**
+     * get function for total revenue
+     * @return total revenue
+     */
     public double getTotalRevenue() {
         double totalRevenue = 0;
         for (Transaction transaction : transactions) {
@@ -39,19 +63,43 @@ public class FinancialHistory implements Serializable {
         return totalRevenue;
     }
 
-    public double getTotalProfit() {
+    /**
+     * get function for total profit
+     * @param appData data stored by the program
+     * @return total profit
+     */
+    public double getTotalProfit(AppData appData) {
         double totalProfit = 0;
+        double totalCosts = this.getTotalCosts(appData);
         for (Transaction transaction : transactions) {
-            totalProfit += transaction.getRevenue() - transaction.getCosts();
+            totalProfit += transaction.getRevenue();
         }
+        totalProfit -= totalCosts;
         return totalProfit;
     }
 
-    public double getTotalCosts() {
+    /**
+     * get function for total costs
+     * @param appData data stored by the program
+     * @return total costs
+     */
+    public double getTotalCosts(AppData appData) {
         double totalCosts = 0;
-        for (Transaction transaction : transactions) {
-            totalCosts += transaction.getCosts();
+        for (ProductInterface product : appData.getInventory().getProducts()) {
+            if (product.getSeller().equals(seller.getUsername())) {
+                totalCosts += product.getCost() * product.getStock();
+            }
         }
         return totalCosts;
+
     }
 }
+
+//    public double getTotalCosts() {
+//        double totalCosts = 0;
+//        for (Transaction transaction : transactions) {
+//            totalCosts += transaction.getCosts();
+//        }
+//        return totalCosts;
+//    }
+//}
