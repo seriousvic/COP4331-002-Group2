@@ -55,9 +55,9 @@ public class Transaction implements Serializable {
             revenue += product.getPrice();
             costs += product.getCost();
         }
-        if (this.discount != null) {
-            discount.applyDiscount(this);
-        }
+//        if (this.discount != null) {
+//            discount.applyDiscount(this);
+//        }
     }
 
     /**

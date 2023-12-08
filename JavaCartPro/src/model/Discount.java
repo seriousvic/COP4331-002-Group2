@@ -4,8 +4,8 @@ public interface Discount {
 
     /**
      * applies a discount to a purchase
-     * @param purchase transaction to apply a discount to
+     * @param shoppingCart transaction to apply a discount to
      */
-    void applyDiscount(Transaction purchase);
+    void applyDiscount(ShoppingCart shoppingCart, double amount);
 }
 //

@@ -52,6 +52,14 @@ public class ShoppingCart implements Serializable {
         return items;
     }
 
+    public void setTotal(double total) {
+        totalPrice = total;
+    }
+
+    public void applyDiscount(Discount discount, double amount) {
+        discount.applyDiscount(this, amount);
+    }
+
     public double getTotalPrice() {
         return totalPrice;
     }

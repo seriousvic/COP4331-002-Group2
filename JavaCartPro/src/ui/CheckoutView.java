@@ -10,6 +10,7 @@ public class CheckoutView extends JFrame {
     private Customer customer;
     private AppData appData;
     private Payment payment = new Payment();
+    private String discountType = "none";
 
     private CheckoutController controller = new CheckoutController();
 
@@ -60,6 +61,25 @@ public class CheckoutView extends JFrame {
         paymentPanel.add(new JLabel("CVV:"));
         paymentPanel.add(ccvField);
 
+        JPanel discountPanel = new JPanel();
+
+
+        // start of discount panel
+        JRadioButton percentDiscountButton = new JRadioButton("Percent Discount");
+        JRadioButton flatDiscountButton = new JRadioButton("Flat Discount");
+        ButtonGroup discountGroup = new ButtonGroup();
+        discountGroup.add(percentDiscountButton);
+        discountGroup.add(flatDiscountButton);
+        discountPanel.add(percentDiscountButton);
+        discountPanel.add(flatDiscountButton);
+
+        JTextField discountValueField = new JTextField(10);
+        discountPanel.add(new JLabel("Discount Value: "));
+        discountPanel.add(discountValueField);
+        percentDiscountButton.addActionListener(e -> discountType = "Percent");
+        flatDiscountButton.addActionListener(e -> discountType = "Flat");
+        // end of discount panel
+
         JButton checkoutButton = new JButton("Checkout");
         checkoutButton.addActionListener(e -> {
             // Set payment information in the Payment object
@@ -68,11 +88,19 @@ public class CheckoutView extends JFrame {
             payment.setCcv(ccvField.getText());
 
             // Perform checkout with credit card information
-            controller.performCheckout(appData, cartItems, customer, CheckoutView.this, payment);
+            controller.performCheckout(appData, cartItems, customer, CheckoutView.this, payment, customer.getShoppingCart(), discountType, Double.parseDouble(discountValueField.getText()));
         });
+
+
+
+
+//        int productQuantity = customer.getShoppingCart().getQuantity(product);
+//        String productName = product.getName();
+
 
         mainPanel.add(itemListAndTotalPanel, BorderLayout.WEST);
         mainPanel.add(paymentPanel, BorderLayout.EAST);
+        mainPanel.add(discountPanel, BorderLayout.CENTER);
         mainPanel.add(checkoutButton, BorderLayout.SOUTH);
 
         add(mainPanel);
