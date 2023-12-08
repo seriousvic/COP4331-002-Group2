@@ -41,7 +41,7 @@ public class InventoryView extends JFrame {
 
         List<ProductInterface> products = appData.getInventory().getProducts();
         for (ProductInterface product : products) {
-            if (user instanceof Customer || (user instanceof Seller && product.getSeller().equals(user.getUsername()))) {
+            if (user instanceof Customer && (product.getStock() > 0) || (user instanceof Seller && product.getSeller().equals(user.getUsername()))) {
                 JPanel productPanel = new JPanel();
                 productPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
                 JButton productNameButton = new JButton(product.getName());

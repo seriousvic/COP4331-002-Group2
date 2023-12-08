@@ -48,6 +48,10 @@ public abstract class ProductDecorator implements Serializable, ProductInterface
         return product.getSellerAccount();
     }
 
+    public void oneSale() {
+        product.oneSale();
+    }
+
     protected ProductInterface product;
     private static final long serialVersionUID = 123L;
 }
