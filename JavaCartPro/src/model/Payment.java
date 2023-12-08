@@ -9,6 +9,10 @@ public class Payment {
         return cardNumber;
     }
 
+    public void chargeCard(double amount) {
+        System.out.println("Charging card " + cardNumber + " $" + amount);
+    }
+
     public String getExpirationMonth() {
         return expirationMonth;
     }
