@@ -1,19 +1,13 @@
 package JavaCartPro.src.model;
 
+/**
+ * class representing a percentage-based discount
+ */
 public class PercentDiscount implements Discount{
-//    double amount;
-
-    /**
-     * constructs a PercentDiscount object
-     * @param percentage the amount of dollars to be removed from the transaction's revenue
-     */
-//    public PercentDiscount(double percentage) {
-//        amount = percentage;
-//    }
-
     /**
      * applies a discount to a purchase
-     * @param purchase the transaction to apply the discount to
+     * @param shoppingCart the shopping cart to apply the discount to
+     * @param amount amount to discount
      */
     @Override
     public void applyDiscount(ShoppingCart shoppingCart, double amount) {

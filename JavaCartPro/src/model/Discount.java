@@ -1,5 +1,8 @@
 package JavaCartPro.src.model;
 
+/**
+ * interface for Discount class
+ */
 public interface Discount {
 
     /**

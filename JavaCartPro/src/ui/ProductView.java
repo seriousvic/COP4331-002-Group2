@@ -5,8 +5,16 @@ import JavaCartPro.src.controller.*;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * product screen
+ */
 public class ProductView extends JFrame {
-
+    /**
+     * constructor
+     * @param appData data stored by the program
+     * @param product product being viewed
+     * @param user user viewing product
+     */
     public ProductView(AppData appData, ProductInterface product, User user) {
         this.appData = appData;
         this.product = product;
@@ -14,6 +22,9 @@ public class ProductView extends JFrame {
         startUI();
     }
 
+    /**
+     * start user interface
+     */
     private void startUI() {
         setTitle("Product Details");
         setSize(400, 300);

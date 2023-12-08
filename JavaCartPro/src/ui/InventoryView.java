@@ -7,8 +7,15 @@ import JavaCartPro.src.controller.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * inventory screen
+ */
 public class InventoryView extends JFrame {
-
+    /**
+     * constructor
+     * @param appData data stored by the program
+     * @param user user viewing inventory
+     */
     public InventoryView(AppData appData, User user) {
         this.appData = appData;
         this.user = user;
@@ -20,6 +27,9 @@ public class InventoryView extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * start user interface
+     */
     private void startUI() {
         JPanel listProductPanel = new JPanel();
         listProductPanel.setLayout(new BoxLayout(listProductPanel, BoxLayout.Y_AXIS));
@@ -59,6 +69,9 @@ public class InventoryView extends JFrame {
         }
     }
 
+    /**
+     * refresh window
+     */
     public void refreshView() {
         getContentPane().removeAll();
         startUI();
@@ -67,7 +80,6 @@ public class InventoryView extends JFrame {
     }
 
     private AppData appData;
-//    private Inventory inventory;
     private User user;
     private InventoryController controller = new InventoryController();
 }

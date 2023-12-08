@@ -1,20 +1,14 @@
 package JavaCartPro.src.model;
 
+/**
+ * class representing a flat discount
+ */
 public class FlatDiscount implements Discount{
-
-//    double amount;
-
-    /**
-     * constructs a FlatDiscount object
-     * @param dollarAmount the amount of dollars to be removed from the transaction's revenue
-     */
-//    public FlatDiscount(double dollarAmount) {
-//        amount = dollarAmount;
-//    }
 
     /**
      * applies a discount to a purchase
-     * @param purchase the transaction to apply the discount to
+     * @param shoppingCart the shopping cart to discount
+     * @param amount amount to discount
      */
     @Override
     public void applyDiscount(ShoppingCart shoppingCart, double amount) {

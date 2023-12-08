@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * financial summary window
+ */
 public class FinancialSummary extends JFrame {
     private User user;
     private FinancialHistory financialHistory;
@@ -18,6 +21,12 @@ public class FinancialSummary extends JFrame {
 
     private FinancialSummaryController controller = new FinancialSummaryController();
 
+    /**
+     * constructor
+     * @param appData data stored by the program
+     * @param user user viewing financial summary
+     * @param financialHistory user's financial history
+     */
     public FinancialSummary(AppData appData, User user, FinancialHistory financialHistory) {
         this.appData = appData;
         this.user = user;
@@ -32,6 +41,9 @@ public class FinancialSummary extends JFrame {
         calculateSummary();
     }
 
+    /**
+     * add components to page
+     */
     private void initComponents() {
         transactionTextArea = new JTextArea(10, 30);
         transactionTextArea.setEditable(false);
@@ -61,6 +73,9 @@ public class FinancialSummary extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * calculate financial summary
+     */
     private void calculateSummary() {
         List<Transaction> transactions = financialHistory.getTransactions();
 
@@ -81,6 +96,10 @@ public class FinancialSummary extends JFrame {
         }
     }
 
+    /**
+     * display a transaction
+     * @param transaction transaction to display
+     */
     private void displayTransaction(Transaction transaction) {
         transactionTextArea.append("\nTransaction Details:\n");
         transactionTextArea.append("User: " + transaction.getCustomer().getUsername() + "\n");

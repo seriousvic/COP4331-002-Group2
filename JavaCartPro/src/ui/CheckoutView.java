@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * checkout screen
+ */
 public class CheckoutView extends JFrame {
     private Customer customer;
     private AppData appData;
@@ -14,7 +17,11 @@ public class CheckoutView extends JFrame {
 
     private CheckoutController controller = new CheckoutController();
 
-    // Constructor
+    /**
+     * constructor
+     * @param appData data stored by the program
+     * @param customer customer checking out
+     */
     public CheckoutView(AppData appData, Customer customer) {
         this.customer = customer;
         this.appData = appData;
@@ -23,6 +30,9 @@ public class CheckoutView extends JFrame {
         initComponents();
     }
 
+    /**
+     * set components in the screen
+     */
     private void initComponents() {
         setTitle("Checkout Screen");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -108,6 +118,11 @@ public class CheckoutView extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * calculate price of items in cart
+     * @param cartItems items in cart
+     * @return total price
+     */
     private double calculateTotalPrice(List<ProductInterface> cartItems) {
         double total = 0;
         for (ProductInterface item : cartItems) {

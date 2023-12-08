@@ -6,7 +6,17 @@ import JavaCartPro.src.controller.*;
 
 import java.awt.*;
 
+/**
+ * bundle product screen
+ */
 public class BundleProductView extends JFrame {
+    /**
+     * constructor
+     * @param appData data stored by the program
+     * @param product product being bundled
+     * @param user user bundling products
+     * @param shoppingCartView shopping cart screen
+     */
     public BundleProductView(AppData appData, BundleProduct product, User user, ShoppingCartView shoppingCartView) {
         this.shoppingCartView = shoppingCartView;
         this.appData = appData;
@@ -16,6 +26,9 @@ public class BundleProductView extends JFrame {
         startUI();
     }
 
+    /**
+     * start user interface
+     */
     private void startUI() {
         setTitle("Product Bundle Details");
         setSize(400, 300);
@@ -60,6 +73,10 @@ public class BundleProductView extends JFrame {
         pack();
         setVisible(true);
     }
+
+    /**
+     * refresh window
+     */
     public void refreshView() {
         getContentPane().removeAll();
         startUI();

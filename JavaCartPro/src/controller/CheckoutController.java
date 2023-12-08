@@ -5,7 +5,21 @@ import JavaCartPro.src.ui.*;
 import javax.swing.*;
 import java.util.List;
 
+/**
+ * controller for the checkout class
+ */
 public class CheckoutController {
+    /**
+     * function to perform a checkout
+     * @param appData data stored by the program
+     * @param cartItems items in the shopping cart
+     * @param customer customer checking out
+     * @param checkoutView checkout screen
+     * @param payment customer's payment information
+     * @param shoppingCart customer's shopping cart
+     * @param discountType discount type to be applied
+     * @param discountAmount discount amount to be applied
+     */
     public void performCheckout(AppData appData, List<ProductInterface> cartItems, Customer customer, CheckoutView checkoutView, Payment payment, ShoppingCart shoppingCart, String discountType, double discountAmount) {
 
 
