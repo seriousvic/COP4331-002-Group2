@@ -57,7 +57,7 @@ public class FinancialHistory implements Serializable {
         double totalCosts = 0;
         for (ProductInterface product : appData.getInventory().getProducts()) {
             if (product.getSeller().equals(seller.getUsername())) {
-                totalCosts += product.getPrice() * product.getStock();
+                totalCosts += product.getCost() * product.getStock();
             }
         }
         return totalCosts;

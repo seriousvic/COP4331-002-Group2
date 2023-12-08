@@ -3,9 +3,10 @@ package JavaCartPro.src.model;
 import java.io.Serializable;
 
 public class Product implements ProductInterface, Serializable {
-    public Product(Seller sellerAccount, String seller, String name, String description, double price, int stock) {
+    public Product(Seller sellerAccount, String seller, String name, String description, double cost, double price, int stock) {
         this.sellerAccount = sellerAccount;
         this.seller = seller;
+        this.cost = cost;
         this.name = name;
         this.description = description;
         this.price = price;
@@ -44,11 +45,16 @@ public class Product implements ProductInterface, Serializable {
         this.stock = stock;
     }
 
+    public double getCost() {
+        return this.cost;
+    }
+
     public Seller getSellerAccount() {
         return this.sellerAccount;
     }
 
     private final String seller;
+    private final double cost;
     private final Seller sellerAccount;
     private final String name;
     private String description;

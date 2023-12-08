@@ -36,6 +36,10 @@ public abstract class ProductDecorator implements Serializable, ProductInterface
         product.setStock(stock);
     }
 
+    public double getCost() {
+        return product.getCost();
+    }
+
     public void setDescription(String description) {
         product.setDescription(description);
     }

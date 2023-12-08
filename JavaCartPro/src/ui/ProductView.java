@@ -52,6 +52,7 @@ public class ProductView extends JFrame {
         }
 
         if (user instanceof Seller) {
+            costLabel = new JLabel("Cost: " + String.format("%.2f", product.getCost()));
             updateButton = new JButton("Update Product");
             updateButton.addActionListener(e -> controller.updateProductClick(appData, product, descriptionField.getText(), Double.parseDouble(priceField.getText()), Integer.parseInt(stockField.getText())));
             panel.add(new JLabel("Description:"));
@@ -79,6 +80,7 @@ public class ProductView extends JFrame {
     private JLabel descriptionLabel;
     private JLabel priceLabel;
     private JLabel stockLabel;
+    private JLabel costLabel;
     private JButton addToCart;
     private JButton createBundle;
     private JButton toInventoryButton;

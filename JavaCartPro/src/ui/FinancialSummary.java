@@ -88,7 +88,7 @@ public class FinancialSummary extends JFrame {
         for (ProductInterface product : transaction.getProducts()) {
             transactionTextArea.append("- " + product.getName() + ": $" + product.getPrice() + "\n");
         }
-        transactionTextArea.append("Total Sales: $" + transaction.getTotalSales() + "\n");
+        transactionTextArea.append("Total Sales: " + transaction.getTotalSales() + "\n");
         transactionTextArea.append("Revenue: $" + transaction.getRevenue() + "\n");
         transactionTextArea.append("Profit: $" + (transaction.getRevenue() - transaction.getCosts()) + "\n");
         transactionTextArea.append("Costs: $" + transaction.getCosts() + "\n");

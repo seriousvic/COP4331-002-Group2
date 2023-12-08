@@ -29,9 +29,9 @@ public class AppData implements Serializable {
         }
     }
 
-    public void addProduct(Seller sellerAccount, String seller, String name, String description, double price, int stock) {
+    public void addProduct(Seller sellerAccount, String seller, String name, String description, double cost, double price, int stock) {
         if (seller != null && name != null && description != null && price > 0 && stock > 0) {
-            this.inventory.addProduct(sellerAccount, seller,name,description,price, stock);
+            this.inventory.addProduct(sellerAccount, seller,name,description, cost, price, stock);
         }
     }
 

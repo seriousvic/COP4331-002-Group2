@@ -11,6 +11,7 @@ public class BundleProduct implements ProductInterface, Serializable {
         this.sellerAccount = product.getSellerAccount();
         this.name = product.getSeller() + "'s Product Bundle";
         this.description = "A bundle of products from " + product.getSeller() + " containing" + product.getName() + ".";
+        this.cost = product.getCost();
         this.price = product.getPrice();
         this.stock = product.getStock();
         this.seller = product.getSeller();
@@ -34,6 +35,7 @@ public class BundleProduct implements ProductInterface, Serializable {
         this.setDescription("");
         this.setPrice(0.0);
         this.setStock(0);
+        this.setCost(0.0);
     }
 
     public void setDescription(String description){
@@ -68,6 +70,14 @@ public class BundleProduct implements ProductInterface, Serializable {
         this.price = sumPrice;
     }
 
+    public void setCost(double cost){
+        double sumCost = 0.0;
+        for (ProductInterface product : products){
+            sumCost += product.getCost();
+        }
+        this.price = sumCost;
+    }
+
     public void setStock(int stock){
         if (products.isEmpty()){
             this.stock = 0;
@@ -81,6 +91,9 @@ public class BundleProduct implements ProductInterface, Serializable {
         this.stock = minStock;
     }
 
+    public double getCost(){
+        return this.cost;
+    }
 
     public String getSeller(){
         return this.seller;
@@ -112,6 +125,7 @@ public class BundleProduct implements ProductInterface, Serializable {
     }
     private final Seller sellerAccount;
     private List<ProductInterface> products = new ArrayList<>();
+    private double cost;
     private final String name;
     private String description;
     private double price;

@@ -35,8 +35,8 @@ public class Seller extends User implements Serializable {
      * @param price       the price of the product
      * @param stock       the stock quantity of the product
      */
-    public void addProductToInventory(String name, String description, double price, int stock) {
-        Inventory.getInstance().addProduct(this, getUsername(), name, description, price, stock);
+    public void addProductToInventory(String name, String description, double cost, double price, int stock) {
+        Inventory.getInstance().addProduct(this, getUsername(), name, description, cost, price, stock);
     }
 
     /**
